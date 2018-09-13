@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Sum A+B</title>
+		<meta charset="utf-8">
+	</head>
+	<body>
+		<p>Enter A:</p>
+		<input id="numA_id" type="text">
+		<p>Enter B:</p>
+		<input id="numB_id" type="text">
+		<p></p>
+		<button id="sum" type="button" onclick="mySum()">Result</button>
+		<p id="output"></p>
+		<script>
+			function mySum() {
+				var numA, numB, result;
+				numA = document.getElementById("numA_id").value;
+				numB = document.getElementById("numB_id").value;
+				if (isNaN(numA) || isNaN(numB)) {
+					result = 'Error: not a number';
+				} else {
+					result = parseFloat(numA) + parseFloat(numB);
+				}
+				//console.log(sum)
+				document.getElementById("output").innerHTML = result;
+			}
+		</script>		
+	</body>
+</html>
