@@ -5,28 +5,68 @@
 		<meta charset="utf-8">
 	</head>
 	<body>
+		<p>
 		<h2 align="left">Oposite word</h2>
-		<p>Enter word:</p>
-		<input id="opWord_id" type="text">
-		<button id="sum" type="button" onclick="myOposite()">Enter</button>
-		<p>Result:</p>
-		<p id="opWordOutput_id"></p>
-		<script>
-			function myOposite() {
-				var opWord, result;
-				opWordIn = document.getElementById("opWord_id").value;
-				result = "opWordIn";
-				for (var i = 0; i < opWordIn.length; i++) {
-					var x = opWordIn.charCodeAt(i);
-					if (x >= 65) {
-					x += 32;
+		<span>Enter word:</span><input id="opWordInput_id" type="text">
+		<button id="opWordButton_id" type="button" onclick="opWordFunction()">Enter</button>
+		<span>Result:</span><span id="opWordOutput_id"></span>
+		</p>
+		<p><h2 align="left">ALERT! DOES NOT WORK WITH EMPTY WORD OR ERASED CELL! Word sum</h2>
+		<input type="text" id="word1"/>
+		<input type="text" id="word2"/>
+		<span id="result"></span></p>
+		<script type="text/javascript">
+			function opWordFunction() {
+				let opWordIn = document.getElementById("opWordInput_id");
+				let opWordOut = document.getElementById("opWordOutput_id");
+				let text = opWordIn.value;
+				let new_text = "";
+				for (let char_idx = text.length - 1; char_idx >= 0; char_idx--) {
+					let char = text.charAt(char_idx);
+					if (char === char.toUpperCase()) {
+						new_text += char.toLowerCase();
 					} else {
-					x -= 32;
+						new_text += char.toUpperCase();
 					}
-					result[i] = x;
 				}
-				document.getElementById("opWordOutput_id").innerHTML = result;
+				opWordOut.innerHTML = new_text;
 			}
+			let word1 = document.querySelector("#word1");
+			let word2 = document.querySelector("#word2");
+			let result = document.querySelector("#result");
+			function invert_word(word) {
+				let new_word = "";
+				for (let char_idx = word.length - 1; char_idx >= 0; char_idx--) {
+					let char = word.charAt(char_idx);
+					if (char === char.toUpperCase()) {
+						new_word += char.toLowerCase();
+					} else {
+						new_word += char.toUpperCase();
+					}
+				}
+				return new_word;
+			}
+			function do_ur_work() {
+				let first = invert_word(word1.value);
+				let second = word2.value;
+				let shorter_len = 0;
+				if (first.length < second.length) {
+					shorter_len = first.length;
+				} else {
+					shorter_len = second.length;
+				}
+				while (true) {
+					if (first[0] === second[0]) {
+						first = first.slice(1);
+						second = second.slice(1);
+					} else {
+					break;
+					}
+				}
+				result.innerHTML = invert_word(first) + second;
+			}
+			word1.addEventListener('input', do_ur_work);
+			word2.addEventListener('input', do_ur_work);
 		</script>
 	</body>
 </html>
