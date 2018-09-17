@@ -23,6 +23,10 @@
 				let new_text = "";
 				for (let char_idx = text.length - 1; char_idx >= 0; char_idx--) {
 					let char = text.charAt(char_idx);
+					if (char.toUpperCase() === char.toLowerCase()) {
+						new_text = "Error";
+						break;
+					}
 					if (char === char.toUpperCase()) {
 						new_text += char.toLowerCase();
 					} else {
