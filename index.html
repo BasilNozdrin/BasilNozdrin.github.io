@@ -5,21 +5,33 @@
 		<meta charset="utf-8">
 	</head>
 	<body>
-		<p><h2 align="left">Oposite word</h2>
+		<p><h1>Commutator Length in Free Group</h1></p>
+		<hr><hr>
+		<p><h2 align="left">Opposite word</h2>
 			<span>Enter word:</span><input id="opWordInput_id" type="text">
 			<button id="opWordButton_id" type="button" onclick="opWordFunction()">Enter</button>
-			<span>Result:</span><span id="opWordOutput_id"></span>
+			<span>Result:</span><span id="opWordOutput_id"; style="font-weight: bold;"></span>
 		</p>
+		<hr>
 		<p><h2 align="left">Word Check</h2>
 			<span>Enter word:</span><input id="wordCheckInput_id" type="text">
 			<button id="wordCheckButton_id" type="button" onclick="wordCheckFunction()">Enter</button>
-			<span>Result:</span><span id="wordCheckOutput_id"></span>
+			<span>Result:</span><span id="wordCheckOutput_id"; style="font-weight: bold;"></span>
 		</p>
-		<p><h2 align="left">ALERT! DOES NOT WORK WITH EMPTY WORD OR ERASED CELL! Word sum</h2>
+		<hr>
+		<p><h2 align="left">Fialkovsky decomposition</h2>
+			<span>Enter word:</span><input id="fialkDecomposeIn_id" type="text">
+			<button id="fialkDecomposeButton_id" type="button" onclick="fialkDecompose()">Enter</button>
+			<p><h3 align="left">Result:</h3>
+			<span id="fialkDecomposeOut_id"; style="font-weight: bold;"></span>
+			</p>
+		</p>
+		<hr>
+		<!--<p><h2 align="left">ALERT! DOES NOT WORK WITH EMPTY WORD OR ERASED CELL! Word sum</h2>
 			<input type="text" id="word1"/>
 			<input type="text" id="word2"/>
-			<span id="result"></span>
-		</p>
+			<span id="result"; style="font-weight: bold;"></span>
+		</p>-->
 		<script type="text/javascript">
 			function opWordFunction() {
 				let opWordIn = document.getElementById("opWordInput_id");
@@ -69,42 +81,56 @@
 				wordCheckOut.innerHTML = "Not in commutator";
 				}
 			}
-			let word1 = document.querySelector("#word1");
-			let word2 = document.querySelector("#word2");
-			let result = document.querySelector("#result");
-			function invert_word(word) {
-				let new_word = "";
-				for (let char_idx = word.length - 1; char_idx >= 0; char_idx--) {
-					let char = word.charAt(char_idx);
-					if (char === char.toUpperCase()) {
-						new_word += char.toLowerCase();
-					} else {
-						new_word += char.toUpperCase();
-					}
+			function fialkDecompose() {
+				let fialkDecomposeIn = document.getElementById("fialkDecomposeIn_id");
+				let fialkDecomposeOut = document.getElementById("fialkDecomposeOut_id");
+				let old_value = Array.from(fialkDecomposeIn.value);
+				let new_value = "";
+				for (перебор вариков) {
+				перебор вариков (for(for)) -> newbie
+				new_value = new_value + "\n" + newbie.join()
 				}
-				return new_word;
+				fialkDecomposeOut.innerHTML = new_value;
 			}
-			function do_ur_work() {
-				let first = invert_word(word1.value);
-				let second = word2.value;
-				let shorter_len = 0;
-				if (first.length < second.length) {
-					shorter_len = first.length;
-				} else {
-					shorter_len = second.length;
-				}
-				while (true) {
-					if (first[0] === second[0]) {
-						first = first.slice(1);
-						second = second.slice(1);
-					} else {
-					break;
+			function not_mine(){
+				let word1 = document.querySelector("#word1");
+				let word2 = document.querySelector("#word2");
+				let result = document.querySelector("#result");
+				function invert_word(word) {
+					let new_word = "";
+					for (let char_idx = word.length - 1; char_idx >= 0; char_idx--) {
+						let char = word.charAt(char_idx);
+						if (char === char.toUpperCase()) {
+							new_word += char.toLowerCase();
+						} else {
+							new_word += char.toUpperCase();
+						}
 					}
+					return new_word;
 				}
-				result.innerHTML = invert_word(first) + second;
-			}
-			word1.addEventListener('input', do_ur_work);
-			word2.addEventListener('input', do_ur_work);
+				function do_ur_work() {
+					let first = invert_word(word1.value);
+					let second = word2.value;
+					let shorter_len = 0;
+					if (first.length < second.length) {
+						shorter_len = first.length;
+					} else {
+						shorter_len = second.length;
+					}
+					while (true) {
+						if (first[0] === second[0]) {
+							first = first.slice(1);
+							second = second.slice(1);
+						} else {
+						break;
+						}
+					}
+					result.innerHTML = invert_word(first) + second;
+				}
+				word1.addEventListener('input', do_ur_work);
+				word2.addEventListener('input', do_ur_work);
+				}
+			not_mine();
 		</script>
 	</body>
 </html>
