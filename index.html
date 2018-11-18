@@ -43,6 +43,31 @@
 			function wordCheckFunction() {
 				let wordCheckIn = document.getElementById("wordCheckInput_id");
 				let wordCheckOut = document.getElementById("wordCheckOutput_id");
+				function innerfunc() {
+				let wdChInCopy = Array.from(wordCheckIn.value);
+				let countLcl = 0;
+				let countUcl = 0;
+				while (wdChInCopy.length !== 0) {
+					lower_case_l = wdChInCopy[0].toLowerCase();
+					upper_case_l = wdChInCopy[0].toUpperCase();
+					arr1 = wdChInCopy.filter(x => (x == lower_case_l)||(x == upper_case_l));
+					countLcl = 0;
+					countUcl = 0;
+					for (let i = arr1.length; i >= 0; i--) {
+						if (arr1[i-1] == lower_case_l) {countLcl += 1;}
+						if (arr1[i-1] == upper_case_l) {countUcl += 1;}
+					}
+					if (countLcl != countUcl) {return false;}
+					wdChInCopy1 = wdChInCopy.filter(x => (x != lower_case_l)&&(x != upper_case_l));
+					wdChInCopy = wdChInCopy1;
+				}
+				return true;
+				}
+				if (innerfunc()==true){
+				wordCheckOut.innerHTML = "In commutator";
+				} else {
+				wordCheckOut.innerHTML = "Not in commutator";
+				}
 			}
 			let word1 = document.querySelector("#word1");
 			let word2 = document.querySelector("#word2");
