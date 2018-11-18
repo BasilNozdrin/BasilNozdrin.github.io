@@ -4,7 +4,7 @@
 		<title>Commutator Length in Free Group</title>
 		<meta charset="utf-8">
 	</head>
-	<body style="background-color: #888888">
+	<body style="background-color: #FFFFFF";>
 		<p><h1>Commutator Length in Free Group</h1></p>
 		<hr><hr>
 		<p><h2 align="left">Opposite word</h2>
@@ -27,11 +27,11 @@
 			</p>
 		</p>
 		<hr>
-		<!--<p><h2 align="left">ALERT! DOES NOT WORK WITH EMPTY WORD OR ERASED CELL! Word sum</h2>
+		<p><h2 align="left">ALERT! DOES NOT WORK WITH EMPTY WORD OR ERASED CELL! Word sum</h2>
 			<input type="text" id="word1"/>
 			<input type="text" id="word2"/>
 			<span id="result"; style="font-weight: bold;"></span>
-		</p>-->
+		</p>
 		<script type="text/javascript">
 			function opWordFunction() {
 				let opWordIn = document.getElementById("opWordInput_id");
@@ -55,18 +55,43 @@
 			function wordCheckFunction() {
 				let wordCheckIn = document.getElementById("wordCheckInput_id");
 				let wordCheckOut = document.getElementById("wordCheckOutput_id");
-			}
-			function fialkDecompose() {
-				let fialkDecomposeIn = document.getElementById("fialkDecomposeIn_id");
-				let fialkDecomposeOut = document.getElementById("fialkDecomposeOut_id");
-				let old_value = Array.from(fialkDecomposeIn.value);
-				let new_value = "";
-				for (перебор вариков) {
-				перебор вариков (for(for)) -> newbie
-				new_value = new_value + "\n" + newbie.join()
+				function innerfunc() {
+				let wdChInCopy = Array.from(wordCheckIn.value);
+				let countLcl = 0;
+				let countUcl = 0;
+				while (wdChInCopy.length !== 0) {
+					lower_case_l = wdChInCopy[0].toLowerCase();
+					upper_case_l = wdChInCopy[0].toUpperCase();
+					arr1 = wdChInCopy.filter(x => (x == lower_case_l)||(x == upper_case_l));
+					countLcl = 0;
+					countUcl = 0;
+					for (let i = arr1.length; i >= 0; i--) {
+						if (arr1[i-1] == lower_case_l) {countLcl += 1;}
+						if (arr1[i-1] == upper_case_l) {countUcl += 1;}
+					}
+					if (countLcl != countUcl) {return false;}
+					wdChInCopy1 = wdChInCopy.filter(x => (x != lower_case_l)&&(x != upper_case_l));
+					wdChInCopy = wdChInCopy1;
 				}
-				fialkDecomposeOut.innerHTML = new_value;
+				return true;
+				}
+				if (innerfunc()==true){
+				wordCheckOut.innerHTML = "In commutator";
+				} else {
+				wordCheckOut.innerHTML = "Not in commutator";
+				}
 			}
+			//function fialkDecompose() {
+			//	let fialkDecomposeIn = document.getElementById("fialkDecomposeIn_id");
+			//	let fialkDecomposeOut = document.getElementById("fialkDecomposeOut_id");
+			//	let old_value = Array.from(fialkDecomposeIn.value);
+			//	let new_value = "";
+			//	for (перебор вариков) {
+			//	перебор вариков (for(for)) -> newbie
+			//	new_value = new_value + "\n" + newbie.join()
+			//	}
+			//	fialkDecomposeOut.innerHTML = new_value;
+			//}
 			function not_mine(){
 				let word1 = document.querySelector("#word1");
 				let word2 = document.querySelector("#word2");
