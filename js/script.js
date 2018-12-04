@@ -1,3 +1,10 @@
+function isOpChar(a,b) {
+    if (a.toLowerCase() == b.toLowerCase()){
+        if (a.toLowerCase() == a) {
+            return b.toUpperCase() == b
+        } else return false
+    } else return false
+}
 function opWordFunction() {
 	let opWordIn = document.getElementById("opWordInput_id");
 	let opWordOut = document.getElementById("opWordOutput_id");
@@ -47,35 +54,39 @@ function wordCheckFunction() {
     };
 };
 function fialkDecompose() {
-    function indexword(word, i1, i2) {
-        result = ""
-        if (i2 - i1 != 1 ) {
-            result = word.substring(i1+1,i2);
-        };
-        return result;
-    };
     let fialkDecomposeIn = document.getElementById("fialkDecomposeIn_id");
     let fialkDecomposeOut = document.getElementById("fialkDecomposeOut_id");
     let in_value = Array.from(fialkDecomposeIn.value);
-    console.log(in_value);
     let out_value = "";
+    function cutter(i1, i2) {
+        result = ""
+        if (i2 - i1 != 1 ) {
+            result = in_value.slice(i1+1,i2);
+        };
+        return result;
+    };
     if (in_value.length < 4) {
         console.log("bad word");
-        new_value = "bad word";
+        out_value = "bad word";
     }
     for (let a1_id = 0; a1_id <= in_value.length - 4; a1_id++) {
-        for (let a2_id = a1_id+1; a2_id <= in_value.length - 3; a2_id++) {
-            for (let b1_id = a2_id+1; b1_id <= in_value.length - 2; b1_id++) {
-                for (let b2_id = b1_id+1; b2_id <= in_value.length - 1; b2_id++) {
-
-                    console.log("самое сложное скрыто здесь")
+        for (let b1_id = a1_id+1; b1_id <= in_value.length - 3; b1_id++) {
+            for (let a2_id = b1_id+1; a2_id <= in_value.length - 2; a2_id++) {
+                for (let b2_id = a2_id+1; b2_id <= in_value.length - 1; b2_id++) {
+                    if (isOpChar(in_value[a1_id],in_value[a2_id]) && isOpChar(in_value[b1_id],in_value[b2_id])) {
+                        let w1 = cutter(-1,a1_id);
+                        let w2 = cutter(a1_id,b1_id);
+                        let w3 = cutter(b1_id,a2_id);
+                        let w4 = cutter(a2_id,b2_id);
+                        let w5 = cutter(b2_id,in_value.length);
+                        let newbie = w1+"("+in_value[a1_id]+")"+w2+"("+in_value[b1_id]+")"+w3+"("+in_value[a2_id]+")"+w4+"("+ in_value[b2_id]+")"+w5;
+                        out_value = out_value + "\n" + newbie.toString();
+                    };
                 };
             };
         };
     };
-//	new_value = new_value + "\n" + newbie.join()
-//	}
-    fialkDecomposeOut.innerHTML = new_value;
+    fialkDecomposeOut.innerHTML = out_value;
 };
 function not_mine(){
     let word1 = document.querySelector("#word1");
@@ -115,4 +126,4 @@ function not_mine(){
     word1.addEventListener('input', do_ur_work);
     word2.addEventListener('input', do_ur_work);
     };
-not_mine();
+//not_mine();
