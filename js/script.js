@@ -1,9 +1,13 @@
 function isOpChar(a,b) {
     if (a.toLowerCase() == b.toLowerCase()){
         if (a.toLowerCase() == a) {
-            return b.toUpperCase() == b
-        } else return false
-    } else return false
+            return b.toUpperCase() == b;
+        } else if (a.toUpperCase() == a) {
+            return b.toLowerCase() == b;
+        } else {
+            return false;
+        };
+    } else {return false;};
 };
 function opWordFunction() {
 	let opWordIn = document.getElementById("opWordInput_id");
