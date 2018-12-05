@@ -4,7 +4,7 @@ function isOpChar(a,b) {
             return b.toUpperCase() == b
         } else return false
     } else return false
-}
+};
 function opWordFunction() {
 	let opWordIn = document.getElementById("opWordInput_id");
 	let opWordOut = document.getElementById("opWordOutput_id");
@@ -23,18 +23,22 @@ function opWordFunction() {
 		};
 	};
 	opWordOut.innerHTML = new_text;
-}
+};
 function wordCheckFunction() {
     let wordCheckIn = document.getElementById("wordCheckInput_id");
     let wordCheckOut = document.getElementById("wordCheckOutput_id");
     function innerFunc() {
-        let wdChInCopy = Array.from(wordCheckIn.value);
+        let wdChInCopy = wordCheckIn.value;
         let countLcl = 0;
         let countUcl = 0;
         while (wdChInCopy.length !== 0) {
             lower_case_l = wdChInCopy[0].toLowerCase();
             upper_case_l = wdChInCopy[0].toUpperCase();
-            arr1 = wdChInCopy.filter(x => (x == lower_case_l)||(x == upper_case_l));
+            let arr1 = "";
+            for (let id = 0; id < wdChInCopy.length; id++){
+                let x = wdChInCopy.charAt(id);
+                if (x == lower_case_l || x == upper_case_l){arr1 += x};
+            };
             countLcl = 0;
             countUcl = 0;
             for (let i = arr1.length; i >= 0; i--) {
@@ -42,11 +46,15 @@ function wordCheckFunction() {
                 if (arr1[i-1] == upper_case_l) {countUcl += 1;}
             };
             if (countLcl != countUcl) {return false;};
-            wdChInCopy1 = wdChInCopy.filter(x => (x != lower_case_l)&&(x != upper_case_l));
+            let wdChInCopy1 = "";
+            for (let id = 0; id < wdChInCopy.length; id++){
+                let x = wdChInCopy.charAt(id);
+                if (x != lower_case_l && x != upper_case_l){wdChInCopy1 += x};
+            };
             wdChInCopy = wdChInCopy1;
         };
         return true;
-    }
+    };
     if (innerFunc()==true){
         wordCheckOut.innerHTML = "In commutator";
     } else {
@@ -56,7 +64,7 @@ function wordCheckFunction() {
 function fialkDecompose() {
     let fialkDecomposeIn = document.getElementById("fialkDecomposeIn_id");
     let fialkDecomposeOut = document.getElementById("fialkDecomposeOut_id");
-    let in_value = Array.from(fialkDecomposeIn.value);
+    let in_value = fialkDecomposeIn.value;
     let out_value = "";
     function cutter(i1, i2) {
         result = ""
@@ -79,8 +87,10 @@ function fialkDecompose() {
                         let w3 = cutter(b1_id,a2_id);
                         let w4 = cutter(a2_id,b2_id);
                         let w5 = cutter(b2_id,in_value.length);
+                        console.log("w1:");
+                        console.log(w1);
                         let newbie = w1+"("+in_value[a1_id]+")"+w2+"("+in_value[b1_id]+")"+w3+"("+in_value[a2_id]+")"+w4+"("+ in_value[b2_id]+")"+w5;
-                        out_value = out_value + "\n" + newbie.toString();
+                        out_value = out_value + "\n" + newbie;
                     };
                 };
             };
