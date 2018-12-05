@@ -90,7 +90,7 @@ function fialkDecompose() {
                         console.log("w1:");
                         console.log(w1);
                         let newbie = w1+"("+in_value[a1_id]+")"+w2+"("+in_value[b1_id]+")"+w3+"("+in_value[a2_id]+")"+w4+"("+ in_value[b2_id]+")"+w5;
-                        out_value = out_value + "\n" + newbie;
+                        out_value = out_value + "<br>" + newbie;
                     };
                 };
             };
