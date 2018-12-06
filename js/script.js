@@ -9,6 +9,37 @@ function isOpChar(a,b) {
         };
     } else {return false;};
 };
+function red(word){
+    let out = "";
+    function innerRed(word,i){
+        if (i == word.length-1){
+            out = word;
+        } else {
+            if (isOpChar(word.charAt(i),word.charAt(i+1))){
+                if (i != 0) {
+                    innerRed(word.slice(0,i)+word.slice(i+2,word.length),i-1)
+                } else {
+                    innerRed(word.slice(0,i)+word.slice(i+2,word.length),i)
+                };
+            } else {
+                innerRed(word, i+1);
+            };
+        };
+    };
+    innerRed(word,0);
+    if (out != ""){
+        return out;
+    } else {
+        return "1"
+    };
+};
+function wordRedFunction(){
+    let wordRedIn = document.getElementById("wordRedInput_id");
+    let wordRedOut = document.getElementById("wordRedOutput_id");
+    let in_value = wordRedIn.value;
+    let out_value = red(in_value);
+    wordRedOut.innerHTML = out_value;
+};
 function opWordFunction() {
 	let opWordIn = document.getElementById("opWordInput_id");
 	let opWordOut = document.getElementById("opWordOutput_id");
@@ -94,7 +125,7 @@ function fialkDecompose() {
                         console.log("w1:");
                         console.log(w1);
                         let newbie = w1+"("+in_value[a1_id]+")"+w2+"("+in_value[b1_id]+")"+w3+"("+in_value[a2_id]+")"+w4+"("+ in_value[b2_id]+")"+w5;
-                        out_value = out_value + "<br>" + newbie;
+                        out_value = out_value + newbie + "\t -> \t" + red(w1+w4+w3+w2+w5) + "<br>";
                     };
                 };
             };
