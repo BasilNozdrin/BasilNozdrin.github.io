@@ -12,7 +12,7 @@ function isOpChar(a,b) {
 function red(word){
     let out = "";
     function innerRed(word,i){
-        if (i == word.length-1){
+        if (i >= word.length-1){
             out = word;
         } else {
             if (isOpChar(word.charAt(i),word.charAt(i+1))){
