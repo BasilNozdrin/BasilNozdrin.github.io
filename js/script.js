@@ -1,3 +1,10 @@
+function union(setA, setB) {
+    var _union = new Set(setA);
+    for (var elem of setB) {
+        _union.add(elem);
+    }
+    return _union;
+}
 function isOpChar(a,b) {
     if (a.toLowerCase() == b.toLowerCase()){
         if (a.toLowerCase() == a) {
@@ -33,12 +40,50 @@ function red(word){
         return "1"
     };
 };
-function wordRedFunction(){
-    let wordRedIn = document.getElementById("wordRedInput_id");
-    let wordRedOut = document.getElementById("wordRedOutput_id");
-    let in_value = wordRedIn.value;
-    let out_value = red(in_value);
-    wordRedOut.innerHTML = out_value;
+function fialkDecompose(word){
+    let result = new Set(null);
+    function cutter(i1, i2) {
+        let result = ""
+        if (i2 - i1 != 1 ) {
+            result = word.slice(i1+1,i2);
+        };
+        return result;
+    };
+    if (word.length < 4) {
+        result.add("1");
+    } else {
+        for (let a1_id = 0; a1_id <= word.length - 4; a1_id++) {
+            for (let b1_id = a1_id+1; b1_id <= word.length - 3; b1_id++) {
+                for (let a2_id = b1_id+1; a2_id <= word.length - 2; a2_id++) {
+                    for (let b2_id = a2_id+1; b2_id <= word.length - 1; b2_id++) {
+                        if (isOpChar(word[a1_id],word[a2_id]) && isOpChar(word[b1_id],word[b2_id])) {
+                            let w1 = cutter(-1,a1_id);
+                            let w2 = cutter(a1_id,b1_id);
+                            let w3 = cutter(b1_id,a2_id);
+                            let w4 = cutter(a2_id,b2_id);
+                            let w5 = cutter(b2_id,word.length);
+                            result.add(red(w1+w4+w3+w2+w5));
+                        };
+                    };
+                };
+            };
+        };
+    };
+    return result;
+};
+function massFialkDecompose(set){
+    let result = new Set(null);
+    set.forEach(word => result = union(result,(fialkDecompose(word))));
+    return result;
+};
+function cl(word){
+    let i = 1;
+    let set = fialkDecompose(word);
+    while (!set.has("1")){
+        set = massFialkDecompose(set);
+        i++;
+    };
+    return i;
 };
 function opWordFunction() {
 	let opWordIn = document.getElementById("opWordInput_id");
@@ -67,8 +112,8 @@ function wordCheckFunction() {
         let countLcl = 0;
         let countUcl = 0;
         while (wdChInCopy.length !== 0) {
-            lower_case_l = wdChInCopy[0].toLowerCase();
-            upper_case_l = wdChInCopy[0].toUpperCase();
+            let lower_case_l = wdChInCopy[0].toLowerCase();
+            let upper_case_l = wdChInCopy[0].toUpperCase();
             let arr1 = "";
             for (let id = 0; id < wdChInCopy.length; id++){
                 let x = wdChInCopy.charAt(id);
@@ -96,22 +141,28 @@ function wordCheckFunction() {
         wordCheckOut.innerHTML = "Not in commutator";
     };
 };
-function fialkDecompose() {
-    let fialkDecomposeIn = document.getElementById("fialkDecomposeIn_id");
-    let fialkDecomposeOut = document.getElementById("fialkDecomposeOut_id");
-    let in_value = fialkDecomposeIn.value;
+function wordRedFunction(){
+    let wordRedIn = document.getElementById("wordRedInput_id");
+    let wordRedOut = document.getElementById("wordRedOutput_id");
+    let in_value = wordRedIn.value;
+    let out_value = red(in_value);
+    wordRedOut.innerHTML = out_value;
+};
+function fialkDecomposeFunction() {
+    let fialkDecomposeFunctionIn = document.getElementById("fialkDecomposeFunctionIn_id");
+    let fialkDecomposeFunctionOut = document.getElementById("fialkDecomposeFunctionOut_id");
+    let in_value = fialkDecomposeFunctionIn.value;
     let out_value = "";
     function cutter(i1, i2) {
-        result = ""
+        let result = ""
         if (i2 - i1 != 1 ) {
             result = in_value.slice(i1+1,i2);
         };
         return result;
     };
     if (in_value.length < 4) {
-        console.log("bad word");
         out_value = "bad word";
-    }
+    };
     for (let a1_id = 0; a1_id <= in_value.length - 4; a1_id++) {
         for (let b1_id = a1_id+1; b1_id <= in_value.length - 3; b1_id++) {
             for (let a2_id = b1_id+1; a2_id <= in_value.length - 2; a2_id++) {
@@ -122,16 +173,21 @@ function fialkDecompose() {
                         let w3 = cutter(b1_id,a2_id);
                         let w4 = cutter(a2_id,b2_id);
                         let w5 = cutter(b2_id,in_value.length);
-                        console.log("w1:");
-                        console.log(w1);
                         let newbie = w1+"("+in_value[a1_id]+")"+w2+"("+in_value[b1_id]+")"+w3+"("+in_value[a2_id]+")"+w4+"("+ in_value[b2_id]+")"+w5;
-                        out_value = out_value + newbie + "\t -> \t" + red(w1+w4+w3+w2+w5) + "<br>";
+                        out_value = out_value + newbie + "&#8195; ----> &#8195;" + red(w1+w4+w3+w2+w5) + "<br>";
                     };
                 };
             };
         };
     };
-    fialkDecomposeOut.innerHTML = out_value;
+    fialkDecomposeFunctionOut.innerHTML = out_value;
+};
+function clFunction(){
+    let clFunctionIn = document.getElementById("clFunctionIn_id");
+    let clFunctionOut = document.getElementById("clFunctionOut_id");
+    let in_value = clFunctionIn.value;
+    let out_value = new String(cl(in_value));
+    clFunctionOut.innerHTML = out_value;
 };
 function not_mine(){
     let word1 = document.querySelector("#word1");
