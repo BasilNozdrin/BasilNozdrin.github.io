@@ -1,3 +1,4 @@
+//Borrowed function for "Set" type
 function union(setA, setB) {
     var _union = new Set(setA);
     for (var elem of setB) {
@@ -5,6 +6,7 @@ function union(setA, setB) {
     }
     return _union;
 }
+//My Own built-in Functions
 function isOpChar(a,b) {
     if (a.toLowerCase() == b.toLowerCase()){
         if (a.toLowerCase() == a) {
@@ -15,7 +17,7 @@ function isOpChar(a,b) {
             return false;
         };
     } else {return false;};
-};
+};//Check are the letters a and b opposite or not
 function red(word){
     let out = "";
     function innerRed(word,i){
@@ -39,7 +41,7 @@ function red(word){
     } else {
         return "1"
     };
-};
+};//Applies reduction on the word
 function fialkDecompose(word){
     let result = new Set(null);
     function cutter(i1, i2) {
@@ -70,12 +72,12 @@ function fialkDecompose(word){
         };
     };
     return result;
-};
+};//Make a set of words of w1w4w3w2w5 type from the word
 function massFialkDecompose(set){
     let result = new Set(null);
     set.forEach(word => result = union(result,(fialkDecompose(word))));
     return result;
-};
+};//Make a set of words of w1w4w3w2w5 type from each word from the set of words
 function cl(word){
     let i = 1;
     let set = fialkDecompose(word);
@@ -84,7 +86,8 @@ function cl(word){
         i++;
     };
     return i;
-};
+};//Calculates commutator length of the word using two previous functions and calculating iterations
+//My Own in-html-used Functions
 function opWordFunction() {
 	let opWordIn = document.getElementById("opWordInput_id");
 	let opWordOut = document.getElementById("opWordOutput_id");
@@ -103,7 +106,7 @@ function opWordFunction() {
 		};
 	};
 	opWordOut.innerHTML = new_text;
-};
+};//Makes an opposite word from the word
 function wordCheckFunction() {
     let wordCheckIn = document.getElementById("wordCheckInput_id");
     let wordCheckOut = document.getElementById("wordCheckOutput_id");
@@ -140,18 +143,20 @@ function wordCheckFunction() {
     } else {
         wordCheckOut.innerHTML = "Not in commutator";
     };
-};
+};//
 function wordRedFunction(){
     let wordRedIn = document.getElementById("wordRedInput_id");
     let wordRedOut = document.getElementById("wordRedOutput_id");
     let in_value = wordRedIn.value;
     let out_value = red(in_value);
     wordRedOut.innerHTML = out_value;
-};
+};//Applies reduction on the word
 function fialkDecomposeFunction() {
+    fialkDecomposeFunctionOut.innerHTML = "processing...";
     let fialkDecomposeFunctionIn = document.getElementById("fialkDecomposeFunctionIn_id");
     let fialkDecomposeFunctionOut = document.getElementById("fialkDecomposeFunctionOut_id");
     let in_value = fialkDecomposeFunctionIn.value;
+    fialkDecomposeFunctionOut.innerHTML = "processing...wait...";
     let out_value = "";
     function cutter(i1, i2) {
         let result = ""
@@ -181,14 +186,17 @@ function fialkDecomposeFunction() {
         };
     };
     fialkDecomposeFunctionOut.innerHTML = out_value;
-};
+};//
 function clFunction(){
+    clFunctionOut.innerHTML = "processing...";
     let clFunctionIn = document.getElementById("clFunctionIn_id");
     let clFunctionOut = document.getElementById("clFunctionOut_id");
     let in_value = clFunctionIn.value;
+    clFunctionOut.innerHTML = "processing...wait...";
     let out_value = new String(cl(in_value));
     clFunctionOut.innerHTML = out_value;
-};
+};//Calculates commutator length of the word
+//I.A.Chistyakov functions
 function not_mine(){
     let word1 = document.querySelector("#word1");
     let word2 = document.querySelector("#word2");
