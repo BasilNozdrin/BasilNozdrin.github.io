@@ -19,34 +19,20 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/css/style.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="2" column="17" lean-forward="true" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
+            <state>
+              <caret column="1" lean-forward="true" selection-start-column="1" selection-end-column="1" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/js/script.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
+            <state relative-caret-position="1360">
               <caret line="80" selection-start-line="80" selection-end-line="80" />
-              <folding>
-                <element signature="e#0#7967#0" />
-                <element signature="e#0#6125#0" />
-                <element signature="e#0#6125#0" />
-                <element signature="e#0#7592#0" />
-                <element signature="e#0#7952#0" />
-                <element signature="e#0#7806#0" />
-                <element signature="e#0#6125#0" />
-                <element signature="e#0#6125#0" />
-                <element signature="e#0#7469#0" />
-                <element signature="e#0#7668#0" />
-                <element signature="e#0#6432#0" />
-                <element signature="e#0#6125#0" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -102,6 +88,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="vcs.Git" />
   </component>
   <component name="RunDashboard">
@@ -159,24 +146,10 @@
     <entry file="file://$PROJECT_DIR$/catalog.html">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/script.js">
+    <entry file="file://$PROJECT_DIR$/css/style.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="80" selection-start-line="80" selection-end-line="80" />
-          <folding>
-            <element signature="e#0#7967#0" />
-            <element signature="e#0#6125#0" />
-            <element signature="e#0#6125#0" />
-            <element signature="e#0#7592#0" />
-            <element signature="e#0#7952#0" />
-            <element signature="e#0#7806#0" />
-            <element signature="e#0#6125#0" />
-            <element signature="e#0#6125#0" />
-            <element signature="e#0#7469#0" />
-            <element signature="e#0#7668#0" />
-            <element signature="e#0#6432#0" />
-            <element signature="e#0#6125#0" />
-          </folding>
+        <state>
+          <caret column="1" lean-forward="true" selection-start-column="1" selection-end-column="1" />
         </state>
       </provider>
     </entry>
@@ -187,10 +160,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/css/style.css">
+    <entry file="file://$PROJECT_DIR$/js/script.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="17" lean-forward="true" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
+        <state relative-caret-position="1360">
+          <caret line="80" selection-start-line="80" selection-end-line="80" />
         </state>
       </provider>
     </entry>
