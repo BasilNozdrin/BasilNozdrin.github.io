@@ -152,11 +152,10 @@ function wordRedFunction(){
     wordRedOut.innerHTML = out_value;
 };//Applies reduction on the word
 function fialkDecomposeFunction() {
-    fialkDecomposeFunctionOut.innerHTML = "processing...";
     let fialkDecomposeFunctionIn = document.getElementById("fialkDecomposeFunctionIn_id");
     let fialkDecomposeFunctionOut = document.getElementById("fialkDecomposeFunctionOut_id");
     let in_value = fialkDecomposeFunctionIn.value;
-    fialkDecomposeFunctionOut.innerHTML = "processing...wait...";
+    fialkDecomposeFunctionOut.innerHTML = "wait...";
     let out_value = "";
     function cutter(i1, i2) {
         let result = ""
@@ -188,7 +187,6 @@ function fialkDecomposeFunction() {
     fialkDecomposeFunctionOut.innerHTML = out_value;
 };//
 function clFunction(){
-    clFunctionOut.innerHTML = "processing...";
     let clFunctionIn = document.getElementById("clFunctionIn_id");
     let clFunctionOut = document.getElementById("clFunctionOut_id");
     let in_value = clFunctionIn.value;
