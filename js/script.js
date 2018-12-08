@@ -8,11 +8,11 @@ function union(setA, setB) {
 }
 //My Own built-in Functions
 function isOpChar(a,b) {
-    if (a.toLowerCase() == b.toLowerCase()){
+    if (a.toLowerCase() === b.toLowerCase()){
         if (a.toLowerCase() == a) {
-            return b.toUpperCase() == b;
-        } else if (a.toUpperCase() == a) {
-            return b.toLowerCase() == b;
+            return b.toUpperCase() === b;
+        } else if (a.toUpperCase() === a) {
+            return b.toLowerCase() === b;
         } else {
             return false;
         };
@@ -25,7 +25,7 @@ function red(word){
             out = word;
         } else {
             if (isOpChar(word.charAt(i),word.charAt(i+1))){
-                if (i != 0) {
+                if (i !== 0) {
                     innerRed(word.slice(0,i)+word.slice(i+2,word.length),i-1)
                 } else {
                     innerRed(word.slice(0,i)+word.slice(i+2,word.length),i)
@@ -36,7 +36,7 @@ function red(word){
         };
     };
     innerRed(word,0);
-    if (out != ""){
+    if (out !== ""){
         return out;
     } else {
         return "1"
@@ -46,7 +46,7 @@ function fialkDecompose(word){
     let result = new Set(null);
     function cutter(i1, i2) {
         let result = ""
-        if (i2 - i1 != 1 ) {
+        if (i2 - i1 !== 1 ) {
             result = word.slice(i1+1,i2);
         };
         return result;
@@ -120,13 +120,13 @@ function wordCheckFunction() {
             let arr1 = "";
             for (let id = 0; id < wdChInCopy.length; id++){
                 let x = wdChInCopy.charAt(id);
-                if (x == lower_case_l || x == upper_case_l){arr1 += x};
+                if (x === lower_case_l || x === upper_case_l){arr1 += x};
             };
             countLcl = 0;
             countUcl = 0;
             for (let i = arr1.length; i >= 0; i--) {
-                if (arr1[i-1] == lower_case_l) {countLcl += 1;}
-                if (arr1[i-1] == upper_case_l) {countUcl += 1;}
+                if (arr1[i-1] === lower_case_l) {countLcl += 1;}
+                if (arr1[i-1] === upper_case_l) {countUcl += 1;}
             };
             if (countLcl != countUcl) {return false;};
             let wdChInCopy1 = "";
@@ -138,7 +138,7 @@ function wordCheckFunction() {
         };
         return true;
     };
-    if (innerFunc()==true){
+    if (innerFunc() === true){
         wordCheckOut.innerHTML = "In commutator";
     } else {
         wordCheckOut.innerHTML = "Not in commutator";
