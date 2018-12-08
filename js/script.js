@@ -190,11 +190,10 @@ function clFunction(){
     let clFunctionIn = document.getElementById("clFunctionIn_id");
     let clFunctionOut = document.getElementById("clFunctionOut_id");
     let in_value = clFunctionIn.value;
-    clFunctionOut.innerHTML = "processing...wait...";
     let out_value = new String(cl(in_value));
-    clFunctionOut.innerHTML = out_value;
+    clFunctionOut.innerHTML = "cl(" + in_value + ")=" + out_value;
 };//Calculates commutator length of the word
-//I.A.Chistyakov functions
+//Borrowed meme functions
 function not_mine(){
     let word1 = document.querySelector("#word1");
     let word2 = document.querySelector("#word2");
