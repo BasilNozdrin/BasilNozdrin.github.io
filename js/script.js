@@ -147,9 +147,7 @@ function cDecomposition(word){
     result = "-1";
     /*while (result === "-1") {*/
     for (let i = 1; i < 2; i++){
-        console.log(set);
         set = massFialkDecomposition(set);
-        console.log(set);
         function f(word){
             if (word.indexOf(":") === (word.length - 1)) {
                 if (result === "-1") {
