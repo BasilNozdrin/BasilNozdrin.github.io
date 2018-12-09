@@ -106,8 +106,8 @@ function fialkDecomposition(word){
     if (separator === -1){
         tail = "";
         head = word;
-    } else if (separator = word.length){
-        tail = word.slice(0,separator);
+    } else if (separator + 1 === word.length){
+        tail = word;
         head = "";
     } else {
         tail = word.slice(0,separator);
@@ -143,20 +143,24 @@ function massFialkDecomposition(set){
     return result;
 };
 function cDecomposition(word){
-    flag = true
     let set = fialkDecomposition(word);
     result = "-1";
-    while (result === "-1") {
+    /*while (result === "-1") {*/
+    for (let i = 1; i < 2; i++){
+        console.log(set);
         set = massFialkDecomposition(set);
+        console.log(set);
         function f(word){
             if (word.indexOf(":") === (word.length - 1)) {
-                result = word.slice(0,-1);
+                if (result === "-1") {
+                    result = word.slice(0,word.length-1);
+                };
             };
         };
         set.forEach(word => f(word));
-    return result;
     };
-};
+    return result;
+};//Presents the word as composition of commutators
 //My Own in-html-used Functions
 function wordCheckFunction() {
     let wordCheckIn = document.getElementById("wordCheckInput_id");
@@ -239,7 +243,7 @@ function clFunction(){
 function fialkDecompositionFunction(){
     let fialkDecompositionFunctionIn = document.getElementById("fialkDecompositionIn_id");
     let fialkDecompositionFunctionOut = document.getElementById("fialkDecompositionOut_id");
-    let in_value = new String(fialkDecompositionFunctionIn.value);
-    let out_value = new String(fialkDecomposition(in_value));
+    let in_value = fialkDecompositionFunctionIn.value;
+    let out_value = cDecomposition(in_value);
     fialkDecompositionFunctionOut.innerHTML = in_value + "&#8194;&#8658;&#8194;" + out_value;
 };//
