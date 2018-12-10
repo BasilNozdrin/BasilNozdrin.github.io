@@ -54,11 +54,7 @@ function red(word){
         };
     };
     innerRed(word,0);
-    if (out !== ""){
-        return out;
-    } else {
-        return ""
-    };
+    return out;
 };//Applies reduction on the word
 function fialkDecompose(word){
     let result = new Set(null);
@@ -92,7 +88,7 @@ function massFialkDecompose(set){
 function cl(word){
     let i = 1;
     let set = fialkDecompose(word);
-    while (!set.has("1")){
+    while (!set.has("")){
         set = massFialkDecompose(set);
         i++;
     };
@@ -128,6 +124,9 @@ function fialkDecomposition(word){
                             let w3 = cutter(b1_id,a2_id,head);
                             let w4 = cutter(a2_id,b2_id,head);
                             let w5 = cutter(b2_id,head.length,head);
+                            console.log("head");console.log(head);
+                            console.log("w1");console.log(w1);console.log("w2");console.log(w2);console.log("w3");console.log(w3);console.log("w4");console.log(w4);console.log("w5");console.log(w5);
+                            console.log("a and b");console.log(a1_id,b1_id,a2_id,b2_id);console.log(a);console.log(b);
                             result.add(tail+"["+red(w1+w4+w3+a+opWord(w1))+","+red(w1+w4+b+opWord(w2)+opWord(w3)+opWord(w4)+opWord(w1))+"]:"+red(w1+w4+w3+w2+w5));
                         };
                     };
@@ -145,17 +144,20 @@ function massFialkDecomposition(set){
 function cDecomposition(word){
     let set = fialkDecomposition(word);
     result = "-1";
-    /*while (result === "-1") {*/
-    for (let i = 1; i < 2; i++){
-        set = massFialkDecomposition(set);
+    while (result === "-1") {
+        console.log("loop");
+        console.log(set);
         function f(word){
             if (word.indexOf(":") === (word.length - 1)) {
                 if (result === "-1") {
                     result = word.slice(0,word.length-1);
+                } else {
+                    result = result + "<br>" + word.slice(0,word.length-1);
                 };
             };
         };
         set.forEach(word => f(word));
+        set = massFialkDecomposition(set);
     };
     return result;
 };//Presents the word as composition of commutators
@@ -223,7 +225,9 @@ function fialkDecomposeFunction() {
                         let w4 = cutter(a2_id,b2_id,in_value);
                         let w5 = cutter(b2_id,in_value.length,in_value);
                         let newbie = w1+"("+in_value[a1_id]+")"+w2+"("+in_value[b1_id]+")"+w3+"("+in_value[a2_id]+")"+w4+"("+ in_value[b2_id]+")"+w5;
-                        out_value = out_value + newbie + "&#8194;&#8658;&#8194;" + red(w1+w4+w3+w2+w5) + "<br>";
+                        let w1w4w3w2w5 = red(w1+w4+w3+w2+w5);
+                        if (w1w4w3w2w5 === ""){w1w4w3w2w5 = "1"};
+                        out_value = out_value + newbie + "&#8194;&#8658;&#8194;" + w1w4w3w2w5 + "<br>";
                     };
                 };
             };
