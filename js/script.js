@@ -124,10 +124,7 @@ function fialkDecomposition(word){
                             let w3 = cutter(b1_id,a2_id,head);
                             let w4 = cutter(a2_id,b2_id,head);
                             let w5 = cutter(b2_id,head.length,head);
-                            console.log("head");console.log(head);
-                            console.log("w1");console.log(w1);console.log("w2");console.log(w2);console.log("w3");console.log(w3);console.log("w4");console.log(w4);console.log("w5");console.log(w5);
-                            console.log("a and b");console.log(a1_id,b1_id,a2_id,b2_id);console.log(a);console.log(b);
-                            result.add(tail+"["+red(w1+w4+w3+a+opWord(w1))+","+red(w1+w4+b+opWord(w2)+opWord(w3)+opWord(w4)+opWord(w1))+"]:"+red(w1+w4+w3+w2+w5));
+                            result.add(tail+"["+red(w1+w4+w3+opWord(a)+opWord(w1))+","+red(w1+w4+opWord(b)+opWord(w2)+opWord(w3)+opWord(w4)+opWord(w1))+"]:"+red(w1+w4+w3+w2+w5));
                         };
                     };
                 };
