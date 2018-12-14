@@ -1,10 +1,3 @@
-function union(setA, setB) {
-    var _union = new Set(setA);
-    for (var elem of setB) {
-        _union.add(elem);
-    }
-    return _union;
-};
 //My Own built-in Functions
 function cutter(i1, i2,word) {
         let result = ""
@@ -118,7 +111,11 @@ function cl(word){
     let set = oneFialkShorten(word);
     while (!set.has("")){
         let result = new Set(null);
-        set.forEach(word => result = union(result,(oneFialkShorten(word))));
+        for (let word of set){
+            for (let newWord of oneFialkShorten(word)){
+                result.add(newWord);
+            };
+        };
         set = result;
         i++;
     };
@@ -164,6 +161,7 @@ function cDecomposition(word){
     initialSet.forEach(obj => set.add(obj.rest));//filling set of rest parts//tails[rest] returns commutator tail from word//always word = tails[rest]+rest
     result = new Set(null);
     while (!set.has("")) {
+        console.log(set);
         for (let value of set) {
             newSet = new Set(null);
             inSet = fialkDecomposition(value);
@@ -180,15 +178,9 @@ function cDecomposition(word){
             set = newSet;
         };
     };
-    console.log(result);
+    //console.log(result);
     return result;
 };//Returns set of presentations of the word as composition of commutators
-//  set of rests:   ->
-//  rest1           ->  fialkDecomposition(rest1):
-//                                  newRest1,newCommutator1     ->  tails[newRest1] = tails[rest1]+newCommutator1
-//                                                                  newSet.add(newRest1)
-//  rest2           ->              newRest2,newCommutator2     ->  ...
-//  rest3           ->  ...
 //My Own in-html-used Functions
 function wordRedFunction(){
     let wordRedIn = document.getElementById("wordRedInput_id");
