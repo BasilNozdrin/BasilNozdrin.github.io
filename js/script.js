@@ -176,6 +176,7 @@ function cDecomposition(word){
                 }
             };
             set = newSet;
+            if (set.has("")){break};
         };
     };
     //console.log(result);
