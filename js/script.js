@@ -162,25 +162,25 @@ function cDecomposition(word){
     initialSet.forEach(obj => tails[obj.rest] = obj.commutator);//filling tails obj with results of first cycle of decomposition
     let set = new Set(null);//set of rest parts
     initialSet.forEach(obj => set.add(obj.rest));//filling set of rest parts//tails[rest] returns commutator tail from word//always word = tails[rest]+rest
+    result = new Set(null);
     while (!set.has("")) {
-        console.log("set:");
-        console.log(set);
         for (let value of set) {
             newSet = new Set(null);
             inSet = fialkDecomposition(value);
             for (let value2 of inSet) {
-                tails[value2.rest] = tails[value] + value2.commutator;
-                newSet.add(value2.rest);
+                if (value2.rest !== ""){
+                    tails[value2.rest] = tails[value] + value2.commutator;
+                    newSet.add(value2.rest);
+                } else {
+                    tails[value2.rest] = tails[value] + value2.commutator;
+                    result.add(tails[""]);
+                    newSet.add(value2.rest);
+                }
             };
             set = newSet;
         };
     };
-    result = new Set(null);
-    for (let value of set) {
-        if (value === ""){
-            result.add(tails[value])
-        };
-    };
+    console.log(result);
     return result;
 };//Returns set of presentations of the word as composition of commutators
 //  set of rests:   ->
@@ -244,5 +244,11 @@ function commutatorPresentationFunction(){
     };
     commutatorPresentationOut.innerHTML = out_value;
 };//
+
+/*s.forEach(function(item, sameItem, s) {
+    document.write("Size of the set object is: " + s.size + "<br />");
+    document.write("Deleting item: " + item + "<br />");
+    s.delete(sameItem);
+});*/
 
 
