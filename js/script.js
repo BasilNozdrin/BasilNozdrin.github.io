@@ -24,6 +24,39 @@ function isOpChar(a,b) {
         };
     } else {return false;};
 };//Check are the letters a and b opposite or not
+function doesWordBelongToCommutator(word){
+    let wdChInCopy = word;
+    let countLcl = 0;
+    let countUcl = 0;
+    let flag = true;
+    while (word.length !== 0) {
+        let lCL = word[0].toLowerCase();
+        let uCL = word[0].toUpperCase();
+        let filteredWord = "";
+        for (let i = 0; i < word.length; i++){
+            let x = word.charAt(i);
+            if (x === lCL || x === uCL){filteredWord += x};
+        };
+        lCLCounter = 0;
+        uCLCounter = 0;
+        for (let i = 0 ; i < filteredWord.length; i++) {
+            if (arr1[i] === lCL) {lCLCounter += 1;}
+            if (arr1[i] === uCL) {uCLCounter += 1;}
+        };
+        if (lCLCounter != uLCCounter) {flag = false;};
+        let newWord = "";
+        for (let id = 0; id < word.length; id++){
+            let x = word.charAt(id);
+            if (x !== lCL && x !== uCL){word1 += x};
+        };
+        word = newWord;
+    };
+    if (flag){
+        wordCheckOut.innerHTML = "In commutator";
+    } else {
+        wordCheckOut.innerHTML = "Not in commutator";
+    };
+};//Check if the word belongs to commutator
 function opWord(word) {
 	let result = "";
 	for (let char_idx = word.length - 1; char_idx >= 0; char_idx--) {
@@ -56,7 +89,7 @@ function red(word){
     innerRed(word,0);
     return out;
 };//Applies reduction on the word
-function fialkDecompose(word){
+function oneFialkShorten(word){
     let result = new Set(null);
     if (word.length < 4) {
         result.add("1");
@@ -80,122 +113,83 @@ function fialkDecompose(word){
     };
     return result;
 };//Make a set of words of w1w4w3w2w5 type from the word
-function massFialkDecompose(set){
-    let result = new Set(null);
-    set.forEach(word => result = union(result,(fialkDecompose(word))));
-    return result;
-};//Make a set of words of w1w4w3w2w5 type from each word from the set of words
 function cl(word){
     let i = 1;
-    let set = fialkDecompose(word);
+    let set = oneFialkShorten(word);
     while (!set.has("")){
-        set = massFialkDecompose(set);
+        let result = new Set(null);
+        set.forEach(word => result = union(result,(oneFialkShorten(word))));
+        set = result;
         i++;
     };
     return i;
-};//Calculates commutator length of the word using two previous functions and calculating iterations
+};//Calculates commutator length of the word using previous function
 function fialkDecomposition(word){
     let result = new Set(null);
-    let separator = word.indexOf(":");
-    let tail = "";
-    let head = "";
-    if (separator === -1){
-        tail = "";
-        head = word;
-    } else if (separator + 1 === word.length){
-        tail = word;
-        head = "";
-    } else {
-        tail = word.slice(0,separator);
-        head = word.slice(separator+1,word.length);
-    };
-    if (head === "") {
-    result.add(tail);
-    } else {
-        for (let a1_id = 0; a1_id <= head.length - 4; a1_id++) {
-            for (let b1_id = a1_id+1; b1_id <= head.length - 3; b1_id++) {
-                for (let a2_id = b1_id+1; a2_id <= head.length - 2; a2_id++) {
-                    for (let b2_id = a2_id+1; b2_id <= head.length - 1; b2_id++) {
-                        if (isOpChar(head[a1_id],head[a2_id]) && isOpChar(head[b1_id],head[b2_id])) {
-                            let a = head[a1_id];
-                            let b = head[b1_id];
-                            let w1 = cutter(-1,a1_id,head);
-                            let w2 = cutter(a1_id,b1_id,head);
-                            let w3 = cutter(b1_id,a2_id,head);
-                            let w4 = cutter(a2_id,b2_id,head);
-                            let w5 = cutter(b2_id,head.length,head);
-                            result.add(tail+"["+red(w1+w4+w3+opWord(a)+opWord(w1))+","+red(w1+w4+opWord(b)+opWord(w2)+opWord(w3)+opWord(w4)+opWord(w1))+"]:"+red(w1+w4+w3+w2+w5));
+    if (word !== "") {
+        for (let a1_id = 0; a1_id <= word.length - 4; a1_id++) {
+            for (let b1_id = a1_id+1; b1_id <= word.length - 3; b1_id++) {
+                for (let a2_id = b1_id+1; a2_id <= word.length - 2; a2_id++) {
+                    for (let b2_id = a2_id+1; b2_id <= word.length - 1; b2_id++) {
+                        if (isOpChar(word[a1_id],word[a2_id]) && isOpChar(word[b1_id],word[b2_id])) {
+                            let a = word[a1_id];
+                            let b = word[b1_id];
+                            let w1 = cutter(-1,a1_id,word);
+                            let w2 = cutter(a1_id,b1_id,word);
+                            let w3 = cutter(b1_id,a2_id,word);
+                            let w4 = cutter(a2_id,b2_id,word);
+                            let w5 = cutter(b2_id,word.length,word);
+                            result.add({
+                                "commutator":"["+red(w1+w4+w3+opWord(a)+opWord(w1))+","+red(w1+w4+opWord(b)+opWord(w2)+opWord(w3)+opWord(w4)+opWord(w1))+"]",
+                                "rest":red(w1+w4+w3+w2+w5)
+                                });
                         };
                     };
                 };
             };
         };
-    };
-    return result;
-};// any word -> set of []:w1w4w3w2w5
-function massFialkDecomposition(set){
-    let result = new Set(null);
-    set.forEach(word => result = union(result,(fialkDecomposition(word))));
-    return result;
-};
-function cDecomposition(word){
-    let set = fialkDecomposition(word);
-    result = "-1";
-    while (result === "-1") {
-        console.log("loop");
-        console.log(set);
-        function f(word){
-            if (word.indexOf(":") === (word.length - 1)) {
-                if (result === "-1") {
-                    result = word.slice(0,word.length-1);
-                } else {
-                    result = result + "<br>" + word.slice(0,word.length-1);
-                };
-            };
-        };
-        set.forEach(word => f(word));
-        set = massFialkDecomposition(set);
-    };
-    return result;
-};//Presents the word as composition of commutators
-//My Own in-html-used Functions
-function wordCheckFunction() {
-    let wordCheckIn = document.getElementById("wordCheckInput_id");
-    let wordCheckOut = document.getElementById("wordCheckOutput_id");
-    function innerFunc() {
-        let wdChInCopy = wordCheckIn.value;
-        let countLcl = 0;
-        let countUcl = 0;
-        while (wdChInCopy.length !== 0) {
-            let lower_case_l = wdChInCopy[0].toLowerCase();
-            let upper_case_l = wdChInCopy[0].toUpperCase();
-            let arr1 = "";
-            for (let id = 0; id < wdChInCopy.length; id++){
-                let x = wdChInCopy.charAt(id);
-                if (x === lower_case_l || x === upper_case_l){arr1 += x};
-            };
-            countLcl = 0;
-            countUcl = 0;
-            for (let i = arr1.length; i >= 0; i--) {
-                if (arr1[i-1] === lower_case_l) {countLcl += 1;}
-                if (arr1[i-1] === upper_case_l) {countUcl += 1;}
-            };
-            if (countLcl != countUcl) {return false;};
-            let wdChInCopy1 = "";
-            for (let id = 0; id < wdChInCopy.length; id++){
-                let x = wdChInCopy.charAt(id);
-                if (x != lower_case_l && x != upper_case_l){wdChInCopy1 += x};
-            };
-            wdChInCopy = wdChInCopy1;
-        };
-        return true;
-    };
-    if (innerFunc() === true){
-        wordCheckOut.innerHTML = "In commutator";
     } else {
-        wordCheckOut.innerHTML = "Not in commutator";
+        result.add({
+            "commutator":"",
+            "rest":""
+            });
     };
-};//
+    return result;
+};//any word -> set of all {"commutator":,"rest":} type objects
+function cDecomposition(word){
+    let tails = {};//object of {rest:commutator} type
+    let initialSet = fialkDecomposition(word);//making first cycle of decomposition
+    initialSet.forEach(obj => tails[obj.rest] = obj.commutator);//filling tails obj with results of first cycle of decomposition
+    let set = new Set(null);//set of rest parts
+    initialSet.forEach(obj => set.add(obj.rest));//filling set of rest parts//tails[rest] returns commutator tail from word//always word = tails[rest]+rest
+    while (!set.has("")) {
+        console.log("set:");
+        console.log(set);
+        for (let value of set) {
+            newSet = new Set(null);
+            inSet = fialkDecomposition(value);
+            for (let value2 of inSet) {
+                tails[value2.rest] = tails[value] + value2.commutator;
+                newSet.add(value2.rest);
+            };
+            set = newSet;
+        };
+    };
+    result = new Set(null);
+    for (let value of set) {
+        if (value === ""){
+            result.add(tails[value])
+        };
+    };
+    return result;
+};//Returns set of presentations of the word as composition of commutators
+//  set of rests:   ->
+//  rest1           ->  fialkDecomposition(rest1):
+//                                  newRest1,newCommutator1     ->  tails[newRest1] = tails[rest1]+newCommutator1
+//                                                                  newSet.add(newRest1)
+//  rest2           ->              newRest2,newCommutator2     ->  ...
+//  rest3           ->  ...
+//My Own in-html-used Functions
 function wordRedFunction(){
     let wordRedIn = document.getElementById("wordRedInput_id");
     let wordRedOut = document.getElementById("wordRedOutput_id");
@@ -203,9 +197,9 @@ function wordRedFunction(){
     let out_value = red(in_value);
     wordRedOut.innerHTML = out_value;
 };//Applies reduction on the word
-function fialkDecomposeFunction() {
-    let fialkDecomposeFunctionIn = document.getElementById("fialkDecomposeFunctionIn_id");
-    let fialkDecomposeFunctionOut = document.getElementById("fialkDecomposeFunctionOut_id");
+function fialkDecompositionFunction() {
+    let fialkDecomposeFunctionIn = document.getElementById("fialkDecompositionFunctionIn_id");
+    let fialkDecomposeFunctionOut = document.getElementById("fialkDecompositionFunctionOut_id");
     let in_value = fialkDecomposeFunctionIn.value;
     let out_value = "";
     if (in_value.length < 4) {
@@ -239,10 +233,16 @@ function clFunction(){
     let out_value = new String(cl(in_value));
     clFunctionOut.innerHTML = "cl(" + in_value + ")=" + out_value;
 };//Calculates commutator length of the word
-function fialkDecompositionFunction(){
-    let fialkDecompositionFunctionIn = document.getElementById("fialkDecompositionIn_id");
-    let fialkDecompositionFunctionOut = document.getElementById("fialkDecompositionOut_id");
-    let in_value = fialkDecompositionFunctionIn.value;
-    let out_value = cDecomposition(in_value);
-    fialkDecompositionFunctionOut.innerHTML = in_value + "&#8194;&#8658;&#8194;" + out_value;
+function commutatorPresentationFunction(){
+    let commutatorPresentationIn = document.getElementById("commutatorPresentationIn_id");
+    let commutatorPresentationOut = document.getElementById("commutatorPresentationOut_id");
+    let in_value = commutatorPresentationIn.value;
+    let presentationSet = cDecomposition(in_value);
+    let out_value = "";
+    for (let value of presentationSet){
+        out_value += in_value + "&#8194;&#8658;&#8194;" + value + "<br>";
+    };
+    commutatorPresentationOut.innerHTML = out_value;
 };//
+
+
