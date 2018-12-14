@@ -240,7 +240,7 @@ function commutatorPresentationFunction(){
     let presentationSet = cDecomposition(in_value);
     let out_value = "";
     for (let value of presentationSet){
-        out_value += in_value + "&#8194;&#8658;&#8194;" + value + "<br>";
+        out_value += in_value + "&#8194;&#8658;&#8194;" + value + "\n";
     };
     commutatorPresentationOut.innerHTML = out_value;
 };//
