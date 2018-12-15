@@ -107,79 +107,75 @@ function oneFialkShorten(word){
     return result;
 };//Make a set of words of w1w4w3w2w5 type from the word
 function cl(word){
-    let i = 1;
-    let set = oneFialkShorten(word);
-    while (!set.has("")){
-        let result = new Set(null);
-        for (let word of set){
-            for (let newWord of oneFialkShorten(word)){
-                result.add(newWord);
-            };
-        };
-        set = result;
-        i++;
-    };
-    return i;
-};//Calculates commutator length of the word using previous function
-function fialkDecomposition(word){
-    let result = new Set(null);
-    if (word !== "") {
-        for (let a1_id = 0; a1_id <= word.length - 4; a1_id++) {
-            for (let b1_id = a1_id+1; b1_id <= word.length - 3; b1_id++) {
-                for (let a2_id = b1_id+1; a2_id <= word.length - 2; a2_id++) {
-                    for (let b2_id = a2_id+1; b2_id <= word.length - 1; b2_id++) {
-                        if (isOpChar(word[a1_id],word[a2_id]) && isOpChar(word[b1_id],word[b2_id])) {
-                            let a = word[a1_id];
-                            let b = word[b1_id];
-                            let w1 = cutter(-1,a1_id,word);
-                            let w2 = cutter(a1_id,b1_id,word);
-                            let w3 = cutter(b1_id,a2_id,word);
-                            let w4 = cutter(a2_id,b2_id,word);
-                            let w5 = cutter(b2_id,word.length,word);
-                            result.add({
-                                "commutator":"["+red(w1+w4+w3+opWord(a)+opWord(w1))+","+red(w1+w4+opWord(b)+opWord(w2)+opWord(w3)+opWord(w4)+opWord(w1))+"]",
-                                "rest":red(w1+w4+w3+w2+w5)
-                                });
-                        };
-                    };
+    if (word === ""){
+        return 0;
+    } else {
+        let i = 1;
+        let set = oneFialkShorten(word);
+        while (!set.has("")){
+            let result = new Set(null);
+            for (let word of set){
+                for (let newWord of oneFialkShorten(word)){
+                    result.add(newWord);
                 };
             };
+            set = result;
+            i++;
         };
-    } else {
-        result.add({
-            "commutator":"",
-            "rest":""
-            });
+        return i;
     };
-    return result;
-};//any word -> set of all {"commutator":,"rest":} type objects
+};//Calculates commutator length of the word using previous function
 function cDecomposition(word){
-    let tails = {};//object of {rest:commutator} type
-    let initialSet = fialkDecomposition(word);//making first cycle of decomposition
-    initialSet.forEach(obj => tails[obj.rest] = obj.commutator);//filling tails obj with results of first cycle of decomposition
-    let set = new Set(null);//set of rest parts
-    initialSet.forEach(obj => set.add(obj.rest));//filling set of rest parts//tails[rest] returns commutator tail from word//always word = tails[rest]+rest
-    result = new Set(null);
+    let tails = {};
+    let set = new Set(null);
+    set.add(word);
+    let result = new Set(null);
     while (!set.has("")) {
-        console.log(set);
-        for (let value of set) {
-            newSet = new Set(null);
-            inSet = fialkDecomposition(value);
-            for (let value2 of inSet) {
-                if (value2.rest !== ""){
-                    tails[value2.rest] = tails[value] + value2.commutator;
-                    newSet.add(value2.rest);
+        function fialkDecomposition(set,obj){
+            let newSet = new Set(null);
+            for (word of set){
+                if (word !== "") {
+                    for (let a1_id = 0; a1_id <= word.length - 4; a1_id++) {
+                        for (let b1_id = a1_id+1; b1_id <= word.length - 3; b1_id++) {
+                            for (let a2_id = b1_id+1; a2_id <= word.length - 2; a2_id++) {
+                                for (let b2_id = a2_id+1; b2_id <= word.length - 1; b2_id++) {
+                                    if (isOpChar(word[a1_id],word[a2_id]) && isOpChar(word[b1_id],word[b2_id])) {
+                                        let a = word[a1_id];
+                                        let b = word[b1_id];
+                                        let w1 = cutter(-1,a1_id,word);
+                                        let w2 = cutter(a1_id,b1_id,word);
+                                        let w3 = cutter(b1_id,a2_id,word);
+                                        let w4 = cutter(a2_id,b2_id,word);
+                                        let w5 = cutter(b2_id,word.length,word);
+                                        let w = red(w1+w4+w3+w2+w5);
+                                        let commutator = "["+red(w1+w4+w3+opWord(a)+opWord(w1))+","+red(w1+w4+opWord(b)+opWord(w2)+opWord(w3)+opWord(w4)+opWord(w1))+"]";
+                                        let newTail;
+                                        if (obj[word] === undefined){
+                                            newTail = commutator;
+                                        } else {
+                                            newTail = obj[word] + commutator;
+                                        };
+                                        if (w === ""){
+                                            result.add(newTail);
+                                        };
+                                        newSet.add(w);
+                                        obj[w] = newTail;
+                                    };
+                                };
+                            };
+                        };
+                    };
                 } else {
-                    tails[value2.rest] = tails[value] + value2.commutator;
-                    result.add(tails[""]);
-                    newSet.add(value2.rest);
-                }
+                    newSet.add("");
+                    obj[""] = obj[word];
+                };
             };
-            set = newSet;
-            if (set.has("")){break};
-        };
+            return {"set": newSet,"obj": obj};
+        };//returns {"set": result,"obj": obj};
+        let newObj = fialkDecomposition(set,tails);
+        set = newObj.set;
+        tails = newObj.obj;
     };
-    //console.log(result);
     return result;
 };//Returns set of presentations of the word as composition of commutators
 //My Own in-html-used Functions
