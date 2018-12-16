@@ -130,7 +130,7 @@ function cDecomposition(word){
     let set = new Set(null);
     set.add(word);
     let result = new Set(null);
-    while (!set.has("")) {
+    while (tails[""]===undefined) {
         function fialkDecomposition(set,obj){
             let newSet = new Set(null);
             for (word of set){
@@ -170,6 +170,10 @@ function cDecomposition(word){
                     obj[""] = obj[word];
                 };
             };
+            console.log("FD.set:");
+            console.log(set);
+            console.log("FD.obj:");
+            console.log(obj);
             return {"set": newSet,"obj": obj};
         };//returns {"set": result,"obj": obj};
         let newObj = fialkDecomposition(set,tails);
