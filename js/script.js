@@ -125,62 +125,50 @@ function cl(word){
         return i;
     };
 };//Calculates commutator length of the word using previous function
-function cDecomposition(word){
-    let tails = {};
-    let set = new Set(null);
-    set.add(word);
-    let result = new Set(null);
-    while (tails[""]===undefined) {
-        function fialkDecomposition(set,obj){
-            let newSet = new Set(null);
-            for (word of set){
-                if (word !== "") {
-                    for (let a1_id = 0; a1_id <= word.length - 4; a1_id++) {
-                        for (let b1_id = a1_id+1; b1_id <= word.length - 3; b1_id++) {
-                            for (let a2_id = b1_id+1; a2_id <= word.length - 2; a2_id++) {
-                                for (let b2_id = a2_id+1; b2_id <= word.length - 1; b2_id++) {
-                                    if (isOpChar(word[a1_id],word[a2_id]) && isOpChar(word[b1_id],word[b2_id])) {
-                                        let a = word[a1_id];
-                                        let b = word[b1_id];
-                                        let w1 = cutter(-1,a1_id,word);
-                                        let w2 = cutter(a1_id,b1_id,word);
-                                        let w3 = cutter(b1_id,a2_id,word);
-                                        let w4 = cutter(a2_id,b2_id,word);
-                                        let w5 = cutter(b2_id,word.length,word);
-                                        let w = red(w1+w4+w3+w2+w5);
-                                        let commutator = "["+red(w1+w4+w3+opWord(a)+opWord(w1))+","+red(w1+w4+opWord(b)+opWord(w2)+opWord(w3)+opWord(w4)+opWord(w1))+"]";
-                                        let newTail;
-                                        if (obj[word] === undefined){
-                                            newTail = commutator;
-                                        } else {
-                                            newTail = obj[word] + commutator;
-                                        };
-                                        if (w === ""){
-                                            result.add(newTail);
-                                        };
-                                        newSet.add(w);
-                                        obj[w] = newTail;
-                                    };
-                                };
+function fialkDecomposition(set,obj){
+    let newSet = new Set(null);
+    for (word of set){
+        if (word !== "") {
+            for (let a1_id = 0; a1_id <= word.length - 4; a1_id++) {
+                for (let b1_id = a1_id+1; b1_id <= word.length - 3; b1_id++) {
+                    for (let a2_id = b1_id+1; a2_id <= word.length - 2; a2_id++) {
+                        for (let b2_id = a2_id+1; b2_id <= word.length - 1; b2_id++) {
+                            if (isOpChar(word[a1_id],word[a2_id]) && isOpChar(word[b1_id],word[b2_id])) {
+                                let a = word[a1_id];
+                                let b = word[b1_id];
+                                let w1 = cutter(-1,a1_id,word);
+                                let w2 = cutter(a1_id,b1_id,word);
+                                let w3 = cutter(b1_id,a2_id,word);
+                                let w4 = cutter(a2_id,b2_id,word);
+                                let w5 = cutter(b2_id,word.length,word);
+                                let w = red(w1+w4+w3+w2+w5);
+                                let commutator = "["+red(w1+w4+w3+opWord(a)+opWord(w1))+","+red(w1+w4+opWord(b)+opWord(w2)+opWord(w3)+opWord(w4)+opWord(w1))+"]";
+                                let newTail = obj[word] + commutator;
+                                newSet.add(w);
+                                obj[w] = newTail;
                             };
                         };
                     };
-                } else {
-                    newSet.add("");
-                    obj[""] = obj[word];
                 };
             };
-            console.log("FD.set:");
-            console.log(set);
-            console.log("FD.obj:");
-            console.log(obj);
-            return {"set": newSet,"obj": obj};
-        };//returns {"set": result,"obj": obj};
-        let newObj = fialkDecomposition(set,tails);
-        set = newObj.set;
-        tails = newObj.obj;
+        } else {
+            newSet.add("");
+            obj[""] = obj[word];
+        };
     };
-    return result;
+    return [newSet,obj];
+};//returns [newSet,obj]
+function cDecomposition(word){
+    let tails = {};
+    let set = new Set(null);
+    tails[word] = "";
+    set.add(word);
+    while (tails[""]===undefined) {
+        let newObj = fialkDecomposition(set,tails);
+        set = newObj[0];
+        tails = newObj[1];
+    };
+    return tails[""];
 };//Returns set of presentations of the word as composition of commutators
 //My Own in-html-used Functions
 function wordRedFunction(){
@@ -230,11 +218,7 @@ function commutatorPresentationFunction(){
     let commutatorPresentationIn = document.getElementById("commutatorPresentationIn_id");
     let commutatorPresentationOut = document.getElementById("commutatorPresentationOut_id");
     let in_value = commutatorPresentationIn.value;
-    let presentationSet = cDecomposition(in_value);
-    let out_value = "";
-    for (let value of presentationSet){
-        out_value += in_value + "&#8194;&#8658;&#8194;" + value + "\n";
-    };
+    let out_value = in_value + "&#8194;&#8658;&#8194;" + cDecomposition(in_value) + "\n";
     commutatorPresentationOut.innerHTML = out_value;
 };//
 
