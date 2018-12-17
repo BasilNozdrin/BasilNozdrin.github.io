@@ -18,30 +18,25 @@ function isOpChar(a,b) {
     } else {return false;};
 };//Check are the letters a and b opposite or not
 function doesWordBelongToCommutator(word){
-    let wdChInCopy = word;
-    let countLcl = 0;
-    let countUcl = 0;
     let flag = true;
     while (word.length !== 0) {
         let lCL = word[0].toLowerCase();
+        let lCLCounter = 0;
         let uCL = word[0].toUpperCase();
+        let uCLCounter = 0;
         let filteredWord = "";
+        let newWord = "";
         for (let i = 0; i < word.length; i++){
             let x = word.charAt(i);
-            if (x === lCL || x === uCL){filteredWord += x};
+            if (x === lCL) {
+                lCLCounter += 1;
+            } else if (x === uCL) {
+                uCLCounter += 1;
+            } else {
+                newWord += x;
+            };
         };
-        lCLCounter = 0;
-        uCLCounter = 0;
-        for (let i = 0 ; i < filteredWord.length; i++) {
-            if (arr1[i] === lCL) {lCLCounter += 1;}
-            if (arr1[i] === uCL) {uCLCounter += 1;}
-        };
-        if (lCLCounter != uLCCounter) {flag = false;};
-        let newWord = "";
-        for (let id = 0; id < word.length; id++){
-            let x = word.charAt(id);
-            if (x !== lCL && x !== uCL){word1 += x};
-        };
+        if (lCLCounter != uCLCounter) {flag = false;};
         word = newWord;
     };
     if (flag){
@@ -176,10 +171,11 @@ function fialkDecompositionFunction() {
     let fialkDecomposeFunctionOut = document.getElementById("fialkDecompositionFunctionOut_id");
     let in_value = red(fialkDecomposeFunctionIn.value);
     let out_value = "";
-    if (in_value.length < 4) {
-        out_value = "bad word";
-    };
-    for (let a1_id = 0; a1_id <= in_value.length - 4; a1_id++) {
+    if (doesWordBelongToCommutator(in_value)){
+        if (in_value.length < 4) {
+            out_value = "bad word";
+        };
+        for (let a1_id = 0; a1_id <= in_value.length - 4; a1_id++) {
         for (let b1_id = a1_id+1; b1_id <= in_value.length - 3; b1_id++) {
             for (let a2_id = b1_id+1; a2_id <= in_value.length - 2; a2_id++) {
                 for (let b2_id = a2_id+1; b2_id <= in_value.length - 1; b2_id++) {
@@ -198,6 +194,9 @@ function fialkDecompositionFunction() {
             };
         };
     };
+    } else {
+        out_value = "Error: Word does not belong to commutator";
+    }
     fialkDecomposeFunctionOut.innerHTML = out_value;
 };//
 function clFunction(){
