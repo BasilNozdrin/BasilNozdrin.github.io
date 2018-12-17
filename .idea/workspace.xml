@@ -23,7 +23,7 @@
         <entry file="file://$PROJECT_DIR$/js/script.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="221">
-              <caret line="164" column="18" lean-forward="true" selection-start-line="164" selection-start-column="18" selection-end-line="164" selection-end-column="18" />
+              <caret line="209" column="41" selection-start-line="209" selection-start-column="41" selection-end-line="209" selection-end-column="41" />
               <folding>
                 <element signature="e#0#10208#0" />
                 <element signature="e#0#10208#0" />
@@ -51,15 +51,15 @@
                 <element signature="e#0#10208#0" />
                 <element signature="e#0#10208#0" />
                 <element signature="e#0#9734#0" />
+                <element signature="e#0#9497#0" />
+                <element signature="e#0#8868#0" />
                 <element signature="e#0#10208#0" />
                 <element signature="e#0#10208#0" />
                 <element signature="e#0#10208#0" />
                 <element signature="e#0#10208#0" />
                 <element signature="e#0#10208#0" />
-                <element signature="e#0#10208#0" />
-                <element signature="e#0#10208#0" />
-                <element signature="e#0#10208#0" />
-                <element signature="e#0#9324#0" />
+                <element signature="e#0#8873#0" />
+                <element signature="e#0#8878#0" />
               </folding>
             </state>
           </provider>
@@ -222,7 +222,7 @@
     <entry file="file://$PROJECT_DIR$/js/script.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
-          <caret line="164" column="18" lean-forward="true" selection-start-line="164" selection-start-column="18" selection-end-line="164" selection-end-column="18" />
+          <caret line="209" column="41" selection-start-line="209" selection-start-column="41" selection-end-line="209" selection-end-column="41" />
           <folding>
             <element signature="e#0#10208#0" />
             <element signature="e#0#10208#0" />
@@ -250,15 +250,15 @@
             <element signature="e#0#10208#0" />
             <element signature="e#0#10208#0" />
             <element signature="e#0#9734#0" />
+            <element signature="e#0#9497#0" />
+            <element signature="e#0#8868#0" />
             <element signature="e#0#10208#0" />
             <element signature="e#0#10208#0" />
             <element signature="e#0#10208#0" />
             <element signature="e#0#10208#0" />
             <element signature="e#0#10208#0" />
-            <element signature="e#0#10208#0" />
-            <element signature="e#0#10208#0" />
-            <element signature="e#0#10208#0" />
-            <element signature="e#0#9324#0" />
+            <element signature="e#0#8873#0" />
+            <element signature="e#0#8878#0" />
           </folding>
         </state>
       </provider>

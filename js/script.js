@@ -45,9 +45,9 @@ function doesWordBelongToCommutator(word){
         word = newWord;
     };
     if (flag){
-        wordCheckOut.innerHTML = "In commutator";
+        return true;
     } else {
-        wordCheckOut.innerHTML = "Not in commutator";
+        return false;
     };
 };//Check if the word belongs to commutator
 function opWord(word) {
@@ -171,17 +171,10 @@ function cDecomposition(word){
     return tails[""];
 };//Returns set of presentations of the word as composition of commutators
 //My Own in-html-used Functions
-function wordRedFunction(){
-    let wordRedIn = document.getElementById("wordRedInput_id");
-    let wordRedOut = document.getElementById("wordRedOutput_id");
-    let in_value = wordRedIn.value;
-    let out_value = red(in_value);
-    wordRedOut.innerHTML = out_value;
-};//Applies reduction on the word
 function fialkDecompositionFunction() {
     let fialkDecomposeFunctionIn = document.getElementById("fialkDecompositionFunctionIn_id");
     let fialkDecomposeFunctionOut = document.getElementById("fialkDecompositionFunctionOut_id");
-    let in_value = fialkDecomposeFunctionIn.value;
+    let in_value = red(fialkDecomposeFunctionIn.value);
     let out_value = "";
     if (in_value.length < 4) {
         out_value = "bad word";
@@ -210,14 +203,14 @@ function fialkDecompositionFunction() {
 function clFunction(){
     let clFunctionIn = document.getElementById("clFunctionIn_id");
     let clFunctionOut = document.getElementById("clFunctionOut_id");
-    let in_value = clFunctionIn.value;
+    let in_value = red(clFunctionIn.value);
     let out_value = new String(cl(in_value));
     clFunctionOut.innerHTML = "cl(" + in_value + ")=" + out_value;
 };//Calculates commutator length of the word
 function commutatorPresentationFunction(){
     let commutatorPresentationIn = document.getElementById("commutatorPresentationIn_id");
     let commutatorPresentationOut = document.getElementById("commutatorPresentationOut_id");
-    let in_value = commutatorPresentationIn.value;
+    let in_value = red(commutatorPresentationIn.value);
     let out_value = in_value + "&#8194;&#8658;&#8194;" + cDecomposition(in_value) + "\n";
     commutatorPresentationOut.innerHTML = out_value;
 };//
