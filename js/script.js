@@ -203,21 +203,23 @@ function clFunction(){
     let clFunctionIn = document.getElementById("clFunctionIn_id");
     let clFunctionOut = document.getElementById("clFunctionOut_id");
     let in_value = red(clFunctionIn.value);
-    let out_value = new String(cl(in_value));
-    clFunctionOut.innerHTML = "cl(" + in_value + ")=" + out_value;
+    let out_value = new String(null);
+    if (doesWordBelongToCommutator(in_value)){
+        out_value = "cl(" + in_value+ ")=" + cl(in_value);
+    } else {
+        out_value = "Error: Word does not belong to commutator";
+    };
+    clFunctionOut.innerHTML = out_value;
 };//Calculates commutator length of the word
 function commutatorPresentationFunction(){
     let commutatorPresentationIn = document.getElementById("commutatorPresentationIn_id");
     let commutatorPresentationOut = document.getElementById("commutatorPresentationOut_id");
     let in_value = red(commutatorPresentationIn.value);
-    let out_value = in_value + "&#8194;&#8658;&#8194;" + cDecomposition(in_value) + "\n";
+    let out_value = new String(null);
+    if (doesWordBelongToCommutator(in_value)){
+        out_value = in_value + "&#8194;&#8658;&#8194;" + cDecomposition(in_value) + "\n";
+    } else {
+        out_value = "Error: Word does not belong to commutator";
+    }
     commutatorPresentationOut.innerHTML = out_value;
 };//
-
-/*s.forEach(function(item, sameItem, s) {
-    document.write("Size of the set object is: " + s.size + "<br />");
-    document.write("Deleting item: " + item + "<br />");
-    s.delete(sameItem);
-});*/
-
-
