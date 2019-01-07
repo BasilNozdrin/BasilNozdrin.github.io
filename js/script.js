@@ -1,5 +1,5 @@
 //My Own built-in Functions
-function cutter(i1, i2,word) {
+function cutter(i1, i2,word){
         let result = ""
         if (i2 - i1 !== 1 ) {
             result = word.slice(i1+1,i2);
@@ -45,7 +45,7 @@ function doesWordBelongToCommutator(word){
         return false;
     };
 };//Check if the word belongs to commutator
-function opWord(word) {
+function opWord(word){
 	let result = "";
 	for (let char_idx = word.length - 1; char_idx >= 0; char_idx--) {
 		let char = word.charAt(char_idx);
@@ -212,8 +212,20 @@ function cP2(word){
     };
     return tails[""];
 };
+function openBracket(word){
+    let arr = word.replace(/\[*/g,"").split(/\]/g);
+    let result = "";
+    for (i of arr){
+        if (i !== ""){
+            let pair = i.split(",");
+            result += opWord(pair[0])+opWord(pair[1])+pair[0]+pair[1];
+        };
+    };
+    console.log(red(result));
+    return red(result);
+};//
 //My Own in-html-used Functions
-function fialkDecompositionFunction() {
+function fialkDecompositionFunction(){
     let fialkDecomposeFunctionIn = document.getElementById("fialkDecompositionFunctionIn_id");
     let fialkDecomposeFunctionOut = document.getElementById("fialkDecompositionFunctionOut_id");
     let in_value = red(fialkDecomposeFunctionIn.value);
@@ -258,6 +270,13 @@ function clFunction(){
     };
     clFunctionOut.innerHTML = out_value;
 };//Calculates commutator length of the word
+function openBracketFunction(){
+    let openBracketFunctionIn = document.getElementById("openBracketFunctionIn_id");
+    let openBracketFunctionOut = document.getElementById("openBracketFunctionOut_id");
+    let in_value = openBracketFunctionIn.value;
+    let out_value = in_value + "&#8194;&#8658;&#8194;" + openBracket(in_value);
+    openBracketFunctionOut.innerHTML = out_value;
+};
 function commutatorPresentationFunction(){
     let commutatorPresentationIn = document.getElementById("commutatorPresentationIn_id");
     let commutatorPresentationOut = document.getElementById("commutatorPresentationOut_id");
