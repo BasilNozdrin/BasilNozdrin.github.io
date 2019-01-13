@@ -304,3 +304,15 @@ function cP2Function(){
     }
     cP2Out.innerHTML = out_value;
 };//
+function sBrFunction(){
+    let sBrFunctionIn = document.getElementById("sBrIn_id");
+    let sBrFunctionOut = document.getElementById("sBrOut_id");
+    let in_value = openBracket(sBrFunctionIn.value);
+    let out_value = new String(null);
+    if (doesWordBelongToCommutator(in_value)){
+        out_value = in_value + "&#8194;&#8658;&#8194;" + cDecomposition(in_value) + "\n";
+    } else {
+        out_value = "Error: Word does not belong to commutator";
+    }
+    sBrFunctionOut.innerHTML = out_value;
+};;
