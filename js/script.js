@@ -221,7 +221,6 @@ function openBracket(word){
             result += opWord(pair[0])+opWord(pair[1])+pair[0]+pair[1];
         };
     };
-    console.log(red(result));
     return red(result);
 };//
 //My Own in-html-used Functions
