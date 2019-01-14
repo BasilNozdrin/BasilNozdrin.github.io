@@ -220,7 +220,7 @@ function setFialkDecomposition2(set,obj,limit){
                                 if (newObj[w] === undefined){
                                     newObj[w] = new Set(null);
                                 };
-                                if (newObj[""] !== undefined)and(newSet.size >= limit){
+                                if ((newObj[""] !== undefined)and(newSet.size >= limit)){
                                     return [newSet,newObj];
                                 };
                                 for (x of obj[word]){
