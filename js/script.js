@@ -220,11 +220,11 @@ function setFialkDecomposition2(set,obj,limit){
                                 if (newObj[w] === undefined){
                                     newObj[w] = new Set(null);
                                 };
-                                if ((newObj[""] !== undefined)and(newSet.size >= limit)){
-                                    return [newSet,newObj];
-                                };
                                 for (x of obj[word]){
                                     newObj[w].add(x + commutator);
+                                };
+                                if ((newObj[""] !== undefined)&&(newSet.size >= limit)){
+                                    return [newSet,newObj];
                                 };
                             };
                         };
@@ -249,7 +249,6 @@ function cP2(word){
         let pairObj = setFialkDecomposition(set,tails);
         set = pairObj[0];//re-set the set
         tails = pairObj[1];//re-set the object
-        console.log(tails);
     };
     return tails[""];
 };
@@ -264,7 +263,6 @@ function cP3(word,limit){
         let pairObj = setFialkDecomposition2(set,tails,limit);
         set = pairObj[0];//re-set the set
         tails = pairObj[1];//re-set the object
-        console.log(tails);
     };
     return tails[""];
 };
@@ -373,7 +371,7 @@ function cP3Function(){
     } else {
         out_value = "Error: Word does not belong to commutator";
     }
-    cP2Out.innerHTML = out_value;
+    cP3Out.innerHTML = out_value;
 };//
 function sBrFunction(){
     let sBrFunctionIn = document.getElementById("sBrIn_id");
