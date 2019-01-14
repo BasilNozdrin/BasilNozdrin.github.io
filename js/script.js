@@ -197,6 +197,47 @@ function setFialkDecomposition(set,obj){
     };
     return [newSet,newObj];
 };
+function setFialkDecomposition2(set,obj,limit){
+    let newSet = new Set(null);
+    let newObj = {};
+    for (word of set){
+        if (word !== "") {
+            for (let a1_id = 0; a1_id <= word.length - 4; a1_id++) {
+                for (let b1_id = a1_id+1; b1_id <= word.length - 3; b1_id++) {
+                    for (let a2_id = b1_id+1; a2_id <= word.length - 2; a2_id++) {
+                        for (let b2_id = a2_id+1; b2_id <= word.length - 1; b2_id++) {
+                            if (isOpChar(word[a1_id],word[a2_id]) && isOpChar(word[b1_id],word[b2_id])) {
+                                let a = word[a2_id];
+                                let b = word[b2_id];
+                                let w1 = cutter(-1,a1_id,word);
+                                let w2 = cutter(a1_id,b1_id,word);
+                                let w3 = cutter(b1_id,a2_id,word);
+                                let w4 = cutter(a2_id,b2_id,word);
+                                let w5 = cutter(b2_id,word.length,word);
+                                let w = red(w1+w4+w3+w2+w5);
+                                let commutator = "["+red(w1+w4+w3+a+opWord(w1))+","+red(w1+w4+b+opWord(w2)+opWord(w3)+opWord(w4)+opWord(w1))+"]";
+                                newSet.add(w);
+                                if (newObj[w] === undefined){
+                                    newObj[w] = new Set(null);
+                                };
+                                if (newObj[""] !== undefined)and(newSet.size >= limit){
+                                    return [newSet,newObj];
+                                };
+                                for (x of obj[word]){
+                                    newObj[w].add(x + commutator);
+                                };
+                            };
+                        };
+                    };
+                };
+            };
+        } else {
+            newSet.add("");
+            newObj[""] = obj[word];
+        };
+    };
+    return [newSet,newObj];
+};
 function cP2(word){
     let tails = {};//Create an object
     tails[word] = new Set(null);//add word:[]
@@ -206,6 +247,21 @@ function cP2(word){
     //tails = {word : [""]}; set = [word];
     while (tails[""] === undefined){
         let pairObj = setFialkDecomposition(set,tails);
+        set = pairObj[0];//re-set the set
+        tails = pairObj[1];//re-set the object
+        console.log(tails);
+    };
+    return tails[""];
+};
+function cP3(word,limit){
+    let tails = {};//Create an object
+    tails[word] = new Set(null);//add word:[]
+    tails[word].add("");//set up word:[""]
+    let set = new Set(null);//make a set
+    set.add(word);//add the word to the set
+    //tails = {word : [""]}; set = [word];
+    while (tails[""] === undefined){
+        let pairObj = setFialkDecomposition2(set,tails,limit);
         set = pairObj[0];//re-set the set
         tails = pairObj[1];//re-set the object
         console.log(tails);
@@ -295,6 +351,22 @@ function cP2Function(){
     let out_value = "";
     if (doesWordBelongToCommutator(in_value)){
         let result = cP2(in_value);//["jaja1","jaja2","jaja3"];
+        for (word of result){
+            out_value += in_value + "&#8194;&#8658;&#8194;" + word + "\n";
+        };
+    } else {
+        out_value = "Error: Word does not belong to commutator";
+    }
+    cP2Out.innerHTML = out_value;
+};//
+function cP3Function(){
+    let cP3In = document.getElementById("cP3In_id");
+    let cP3Out = document.getElementById("cP3Out_id");
+    let limit = document.getElementById("cp3Limit_id");
+    let in_value = red(cP3In.value);
+    let out_value = "";
+    if (doesWordBelongToCommutator(in_value)){
+        let result = cP3(in_value,limit);//["jaja1","jaja2","jaja3"];
         for (word of result){
             out_value += in_value + "&#8194;&#8658;&#8194;" + word + "\n";
         };
