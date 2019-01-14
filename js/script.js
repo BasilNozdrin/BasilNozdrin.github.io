@@ -223,9 +223,10 @@ function setFialkDecomposition2(set,obj,limit){
                                 for (x of obj[word]){
                                     newObj[w].add(x + commutator);
                                 };
-                                if ((newObj[""] !== undefined)&&(newSet.size >= limit)){
+                                if ((w === "")&&(newObj[""].size >= limit)){
+                                    console.log("triggered");
                                     return [newSet,newObj];
-                                };
+                                } else {console.log("not triggered");};
                             };
                         };
                     };
