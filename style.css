@@ -1,8 +1,16 @@
 @import url('https://fonts.googleapis.com/css?family=Ubuntu');
 
+* {
+    box-sizing: border-box;
+}
+
+html {
+    height: 100%;
+}
+
 body {
     font-family: 'Ubuntu', sans-serif;
-    background: #76e805;
+    background: #0071c2;
 }
 
 h1 {
@@ -19,8 +27,7 @@ h2 {
     background-image: url(background.jpg);
     background-repeat: no-repeat;
     background-position: center center;
-    border: 15px solid #1150e9;
-    border-radius: 15px;
+    border: 0;
     box-shadow: 0 0 20px rgba(0,0,0,0.5);
 }
 
@@ -32,8 +39,7 @@ h2 {
     padding: 20px;
     display: none;
     background-color: rgba(255, 255, 255, 0.8);
-    border: 7px solid #1150e9;
-    border-radius: 15px;
+    border: 0;
     box-shadow: 0 0 20px rgba(0,0,0,0.5);
 }
 
@@ -46,32 +52,30 @@ h2 {
     font-size: 30px;
     text-align: center;
     text-decoration: none;
-    color:  #1150e9;
+    color:  #0071c2;
     padding: 7px;
     margin-top: 10px;
-    background-color: #76e805;
-    border: 7px solid #1150e9;
+    background-color: #000000;
     border-radius: 15px;
     box-shadow: 0 0 20px rgba(0,0,0,0.5);
 }
 
 #aResult:active {
-    color: #76e805;
-    background:  #1150e9;
+    color: #000000;
+    background:  #0071c2;
 }
 
 #coins {
     padding: 7px;
     position: absolute;
     top: 30px;
-    left: 10%;
+    right: 10%;
     font-size: 30px;
-    color: #000000;
+    color: #ffffff;
     font-weight: bolder;
-    width: 20vw;
-    background-color: rgba(255, 255, 255, 0.8);
-    border: 7px solid #1150e9;
-    border-radius: 15px;
+    width: 40vh;
+    background-color: rgba(50, 50, 50, 0.7);
+    border: 0;
     box-shadow: 0 0 20px rgba(0,0,0,0.5);
 }
 
@@ -106,7 +110,7 @@ h2 {
     width: 50vw;
     height: 30vh;
     background-color: rgba(255, 255, 255, 0.8);
-    border: 7px solid #1150e9;
+    border: 0;
     border-radius: 15px;
     box-shadow: 0 0 20px rgba(0,0,0,0.5);
 }
@@ -118,8 +122,8 @@ input {
     font-size: 3em;
     box-shadow: inset 0 1px 2px rgba(0, 0, 0, .39), 0 -1px 1px #FFF, 0 1px 0 #FFF;
     outline: 0;
-    color: #1150e9;
-    border: 7px solid #1150e9;
+    color: #0071c2;
+    border: 0;
     border-radius: 15px;
 }
 
@@ -136,16 +140,16 @@ a.button {
     transition: 0.2s;
     top: 50%;
     right: 0;
-    background-color: #76e805;
-    border: 7px solid #1150e9;
+    background-color: #000000;
+    border: 0;
     border-radius: 15px;
     box-shadow: 0 0 20px rgba(0,0,0,0.5);
     margin-bottom: 10px;
 }
 
 a.button:hover {
-    background: #76e805;
-    color: #1150e9;
+    background: #0071c2;
+    color: #000000;
 }
 
 a.button:active {
@@ -160,7 +164,7 @@ a.button:active {
 }
 
 thead {
-    background: #1150e9;
+    background: #0071c2;
     font-weight: bolder;
     font-size: 1.5em;
     color: #D2E0E6;
@@ -187,15 +191,13 @@ h1 {
 }
 
 tr {
-    border: 7px solid #1150e9;
+    border: 7px solid #0071c2;
     border-radius: 15px;
 }
 
 td {
     border-bottom: 1px solid black;
-    padding: 5px;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding: 10px 5px;
     font-weight: bolder;
     font-size: 1.3em;
 }

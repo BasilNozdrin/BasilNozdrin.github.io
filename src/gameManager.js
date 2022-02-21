@@ -20,12 +20,12 @@ class GameManager {
     kill(obj, win = false, count) {
         if (win) {
             this.totalScore += count;
-            document.getElementById("total").innerHTML = gameManager.totalScore;
+            document.querySelector("#total").innerHTML = gameManager.totalScore;
 
             if (this.levels.curr === this.levels.max) {
                 soundManager.stopAll();
                 soundManager.init();
-                soundManager.play("/mus/aud5.mp3", {looping: 0, volume: 0.5});
+                soundManager.play("/mus/aud5.wav", {looping: 0, volume: 0.5});
                 scoreTable.add(nickname, obj.countCoins);
                 elem.innerHTML = 'Ура! Кажется, у нас новый победитель!';
                 elem1.innerHTML = 'Круто, но я хочу пройти заново!';
@@ -107,20 +107,19 @@ class GameManager {
         mapManager.parseEntities();
         mapManager.draw(ctx);
         eventManager.setup();
-        document.getElementById("pCoins").innerHTML = this.totalScore < 0 ? "0" : this.totalScore;
-        document.getElementById("total").innerHTML = this.levels.curr;
+        document.querySelector("#pCoins").innerHTML = this.totalScore < 0 ? "0" : this.totalScore;
+        document.querySelector("#total").innerHTML = this.levels.curr;
     }
 
     play() {
         this.levels.curr = 1;
         this.totalScore = 0;
-        nickname = document.getElementById("nick").value;
+        nickname = document.querySelector("#nickname").value;
 
         if(nickname.length > 0){
-            document.getElementById("myModal").style.display = "none";
-
+            document.querySelector("#myModal").style.display = "none";
             soundManager.init();
-            soundManager.loadArray(["/mus/aud1.wav","/mus/aud2.mp3", "/mus/aud3.mp3", "/mus/aud6.mp3", "/mus/aud5.mp3"]);
+            soundManager.loadArray(["/mus/aud1.wav","/mus/aud2.mp3", "/mus/aud3.wav", "/mus/aud6.mp3", "/mus/aud5.wav"]);
             soundManager.play("/mus/aud6.mp3", {looping: 1, volume: 0.5});
             this.loadAll();
             updateWorld();

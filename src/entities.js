@@ -72,15 +72,15 @@ class Player extends Entity {
             gameManager.kill(this, false);
             soundManager.stopAll();
             soundManager.init();
-            soundManager.play("/mus/aud3.mp3", {looping: 0, volume: 0.5});
-            elem.innerHTML = 'Уууупс, игра окончена, дорогой друг!';
-            elem1.innerHTML = 'Хочу играть заново!';
+            soundManager.play("/mus/aud3.wav", {looping: 0, volume: 0.5});
+            elem.innerHTML = 'GG wp';
+            elem1.innerHTML = 'play again';
             result.style.display = 'block';
         } else {
             gameManager.kill(this, true, this.countCoins);
         }
 
-        document.getElementById("records").innerHTML = scoreTable.get();
+        document.querySelector("#records").innerHTML = scoreTable.get();
 
         elem1.onclick = function () {
             gameManager.play();
