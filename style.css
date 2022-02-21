@@ -68,8 +68,8 @@ h2 {
 #coins {
     padding: 7px;
     position: absolute;
-    top: 30px;
-    right: 10%;
+    top: 370px;
+    left: 5%;
     font-size: 30px;
     color: #ffffff;
     font-weight: bolder;
@@ -187,11 +187,11 @@ table {
 
 h1 {
     border-bottom: 1px solid black;
-    margin: 0px;
+    margin: 0;
 }
 
 tr {
-    border: 7px solid #0071c2;
+    border: 0;
     border-radius: 15px;
 }
 

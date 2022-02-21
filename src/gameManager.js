@@ -115,7 +115,6 @@ class GameManager {
         this.levels.curr = 1;
         this.totalScore = 0;
         nickname = document.querySelector("#nickname").value;
-
         if(nickname.length > 0){
             document.querySelector("#myModal").style.display = "none";
             soundManager.init();
