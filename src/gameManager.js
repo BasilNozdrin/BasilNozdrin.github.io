@@ -119,7 +119,7 @@ class GameManager {
         if(nickname.length > 0){
             document.querySelector("#myModal").style.display = "none";
             soundManager.init();
-            soundManager.loadArray(["/mus/aud1.wav","/mus/aud2.mp3", "/mus/aud3.wav", "/mus/aud6.mp3", "/mus/aud5.wav"]);
+            soundManager.loadArray(["/mus/aud1.wav","/mus/aud2.wav", "/mus/aud3.wav", "/mus/aud6.mp3", "/mus/aud5.wav"]);
             soundManager.play("/mus/aud6.mp3", {looping: 1, volume: 0.5});
             this.loadAll();
             updateWorld();

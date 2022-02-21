@@ -1,52 +1,46 @@
 <html lang="ru">
-   <head>
-       <meta charset="utf-8">
-		<title>Супер-мега-платформер (нет)</title>
-       <link rel="stylesheet" href="style.css">
-   </head>
-    <body>
-	<div id="myModal" class="modal">
-		<div class="modal-content">
-            <h2>Добро пожаловать в Супер-мега-платформер!</h2>
-            <h3>Вводи имя и начинай играть!</h3>
-			<input type="text" name="nickname" placeholder="Как тебя зовут?" id="nickname" size="20"/>
-            <br>
-            <a onclick="gameManager.play()" class="button" id="start">Играть</a>
-		</div>
+<head>
+	<meta charset="utf-8">
+	<title>Супер-мега-платформер (нет)</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="myModal" class="modal">
+	<div class="modal-content">
+		<h2>Welcome! Choose you nickname:</h2>
+		<input type="text" name="nickname" placeholder="Как тебя зовут?" id="nickname" size="20"/><br>
+		<a onclick="gameManager.play()" class="button" id="start">PLAY</a>
 	</div>
-
-    <canvas id="canvasId" width="1200" height="850"></canvas>
-
-    <div id="coins">
-        <p>Набрано биткоинов: <b id="pCoins"></b></p>
-        <p>Ваш уровень, сэр: <b id="total"></b></p>
-    </div>
-    <div id="result">
-        <h2 id="hBody"></h2>
-        <a id="aResult" href="/index.html"></a>
-    </div>
-
-	<div id="scoretable">
-		<h2>Top score</h2>
-        <table>
-			<thead>
-				<tr>
-					<th>Time</th><th>Nickname</th><th>Score</th>
-				</tr>
-			</thead>
-			<tbody id="records"></tbody>
-		</table>
-	</div>
-
-	<script src="src/gameManager.js"></script>
-	<script src="src/mapManager.js"></script>
-	<script src="src/spriteManager.js"></script>
-	<script src="src/physicManager.js"></script>
-	<script src="src/soundManager.js"></script>
-	<script src="src/eventManager.js"></script>
-    <script src="src/scoreTable.js"></script>
-	<script src="src/entities.js"></script>
-	<script src="src/utils.js"></script>
-    <script src="script.js"></script>
-    </body>
+</div>
+<canvas id="canvasId" width="1200" height="850"></canvas>
+<div id="coins">
+	<p>Score: <b id="pCoins"></b></p>
+	<p>Level: <b id="total"></b></p>
+</div>
+<div id="result">
+	<h2 id="hBody"></h2>
+	<a id="aResult" href="/index.html"></a>
+</div>
+<div id="scoretable">
+	<h2>Top score</h2>
+	<table>
+		<thead>
+		<tr>
+			<th>Time</th><th>Nickname</th><th>Score</th>
+		</tr>
+		</thead>
+		<tbody id="records"></tbody>
+	</table>
+</div>
+<script src="src/gameManager.js"></script>
+<script src="src/mapManager.js"></script>
+<script src="src/spriteManager.js"></script>
+<script src="src/physicManager.js"></script>
+<script src="src/soundManager.js"></script>
+<script src="src/eventManager.js"></script>
+<script src="src/scoreTable.js"></script>
+<script src="src/entities.js"></script>
+<script src="src/utils.js"></script>
+<script src="script.js"></script>
+</body>
 </html>

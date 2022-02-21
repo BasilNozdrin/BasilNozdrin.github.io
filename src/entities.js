@@ -49,7 +49,7 @@ class Player extends Entity {
         if (obj.name.match(/kosm/)) {;
             soundManager.stopAll();
             soundManager.init();
-            soundManager.play("/mus/aud2.mp3", {looping: 0, volume: 1});
+            soundManager.play("/mus/aud2.wav", {looping: 0, volume: 1});
             obj.touch = true;
             this.win = true;
             obj.move_y = 4;
