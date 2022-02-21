@@ -23,7 +23,7 @@ class GameManager {
             document.getElementById("total").innerHTML = gameManager.totalScore;
 
             if (this.levels.curr === this.levels.max) {
-                soundManager.disconnect();
+                soundManager.stopAll();
                 soundManager.init();
                 soundManager.play("/mus/aud5.mp3", {looping: 0, volume: 0.5});
                 scoreTable.add(nickname, obj.countCoins);
@@ -90,48 +90,38 @@ class GameManager {
     }
 
     draw(ctx) {
-        for (let e = 0; e < this.entities.length; e++)
+        for(let e = 0; e < this.entities.length; e++)
             this.entities[e].draw(ctx);
     }
 
     loadAll() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         mapManager = new MapManager();
-        mapManager.loadMap("lvl" + this.levels.curr + ".json");
+        mapManager.loadMap(this.levels.curr + ".json");
         spriteManager.loadAtlas("sprites.json", "spritesheet.png");
         this.factory['player'] = Player;
         this.factory['coins'] = Coins;
         this.factory['enemy1'] = Enemy1;
         this.factory['enemy2'] = Enemy2;
-        this.factory['wasd'] = Rocket;
+        this.factory['kosm'] = Rocket;
         mapManager.parseEntities();
         mapManager.draw(ctx);
         eventManager.setup();
-        document.querySelector("#pCoins").innerHTML = this.totalScore > 0 ? this.totalScore : "0";
-        document.querySelector("#total").innerHTML = this.levels.curr;
+        document.getElementById("pCoins").innerHTML = this.totalScore < 0 ? "0" : this.totalScore;
+        document.getElementById("total").innerHTML = this.levels.curr;
     }
 
     play() {
         this.levels.curr = 1;
         this.totalScore = 0;
-        nickname = document.querySelector("#nickname").value;
-        if (nickname.length > 0) {
-            document.querySelector("#myModal").style.display = "none";
-            // document.querySelector("#scoretable").style.display = "none";
+        nickname = document.getElementById("nick").value;
+
+        if(nickname.length > 0){
+            document.getElementById("myModal").style.display = "none";
+
             soundManager.init();
-            soundManager.loadArray([
-                "/assets/mixkit-retro-game-notification-212.wav",
-                "/assets/mixkit-intro-transition-1146.wav",
-                "/assets/mixkit-technological-futuristic-hum-2133.wav",
-                "/assets/alex-productions-epic-cinematic-gaming-cyberpunk-reset.mp3",
-/*  Epic Cinematic Gaming Cyberpunk | RESET by Alex-Productions | https://www.youtube.com/channel/UCx0_M61F81Nfb-BRXE-SeVA
-    Music promoted by https://www.chosic.com/free-music/all/
-    Creative Commons CC BY 3.0
-    https://creativecommons.org/licenses/by/3.0/
-*/
-                "/assets/mixkit-trumpet-fanfare-2293.wav"
-            ]);
-            soundManager.play("/assets/alex-productions-epic-cinematic-gaming-cyberpunk-reset.mp3", {looping: 1, volume: 0.05});
+            soundManager.loadArray(["/mus/aud1.wav","/mus/aud2.mp3", "/mus/aud3.mp3", "/mus/aud6.mp3", "/mus/aud5.mp3"]);
+            soundManager.play("/mus/aud6.mp3", {looping: 1, volume: 0.5});
             this.loadAll();
             updateWorld();
         }
@@ -141,6 +131,6 @@ class GameManager {
         this.levels.curr++;
         this.loadAll();
         updateWorld();
-        soundManager.play("/assets/alex-productions-epic-cinematic-gaming-cyberpunk-reset.mp3", {looping: 1, volume: 0.5});
+        soundManager.play("/mus/aud6.mp3", {looping: 1, volume: 0.5});
     }
 }

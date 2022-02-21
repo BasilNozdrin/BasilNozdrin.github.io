@@ -15,7 +15,7 @@ let mapManager = new MapManager();
 const spriteManager = new SpriteManager();
 const physicManager = new PhysicManager();
 
-let step = 1 / 20, counter = 0, dt = 0, now, last = timestamp();
+var step = 1 / 20, counter = 0, dt = 0, now, last = timestamp();
 
 window.onload = function () {
     document.getElementById("records").innerHTML = scoreTable.get();

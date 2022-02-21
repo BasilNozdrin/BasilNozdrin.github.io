@@ -1,4 +1,5 @@
 class SoundManager {
+
     constructor() {
         this.gainNode = null;
         this.clips = {};
@@ -8,7 +9,7 @@ class SoundManager {
 
     init() {
         this.context = new AudioContext();
-        this.gainNode = this.context.createGain()
+        this.gainNode = this.context.createGain ? this.context.createGain() : this.context.createGainNode();
         this.gainNode.connect(this.context.destination);
     }
 
@@ -22,6 +23,7 @@ class SoundManager {
             this.play(clip.path, {looping: loop ? loop : false, volume: volume ? volume : 1});
         };
         this.clips[path] = clip;
+
         const request = new XMLHttpRequest();
         request.open('GET', path, true);
         request.responseType = 'arraybuffer';
@@ -30,7 +32,7 @@ class SoundManager {
                 clip.buffer = buffer;
                 clip.loaded = true;
                 callback(clip);
-            }).then(r => {});
+            });
         };
         request.send();
     }
@@ -49,16 +51,20 @@ class SoundManager {
     }
 
     play(path, settings) {
-        if (!this.loaded) {
-            setTimeout(() => {
-                this.play(path, settings);
-            }, 1000);
+        if(!this.loaded) {
+            setTimeout(() => {this.play(path, settings);},1000);
             return;
         }
-        let looping = settings? (settings.looping? settings.looping : false ) : false;
-        let volume = settings? (settings.volume? settings.volume : 1 ) : 1;
+        let looping = false;
+        let volume = 1;
+        if(settings) {
+            if(settings.looping)
+                looping = settings.looping;
+            if(settings.volume)
+                volume = settings.volume;
+        }
         let sd = this.clips[path];
-        if (sd === null)
+        if(sd === null)
             return false;
         const sound = this.context.createBufferSource();
         sound.buffer = sd.buffer;
@@ -69,7 +75,7 @@ class SoundManager {
         return true;
     }
 
-    disconnect() {
+    stopAll() {
         this.gainNode.disconnect();
     }
 }

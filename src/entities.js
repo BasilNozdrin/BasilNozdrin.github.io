@@ -47,7 +47,7 @@ class Player extends Entity {
 
         }
         if (obj.name.match(/kosm/)) {;
-            soundManager.disconnect();
+            soundManager.stopAll();
             soundManager.init();
             soundManager.play("/mus/aud2.mp3", {looping: 0, volume: 1});
             obj.touch = true;
@@ -70,7 +70,7 @@ class Player extends Entity {
         gameManager.kill(this);
         if (!this.win) {
             gameManager.kill(this, false);
-            soundManager.disconnect();
+            soundManager.stopAll();
             soundManager.init();
             soundManager.play("/mus/aud3.mp3", {looping: 0, volume: 0.5});
             elem.innerHTML = 'Уууупс, игра окончена, дорогой друг!';
@@ -144,7 +144,7 @@ class Rocket extends Entity {
     }
 
     draw(ctx) {
-        spriteManager.drawSprite(ctx, "wasd", this.pos_x, this.pos_y - 150);
+        spriteManager.drawSprite(ctx, "kosm", this.pos_x, this.pos_y - 150);
     }
 
     update() {

@@ -17,13 +17,13 @@ const setItem = (item, val) => {
 
 const updateWorld = () => {
     now = timestamp();
-    let dt = dt + Math.min(1, (now - last) / 900);
+    dt = dt + Math.min(1, (now - last) / 900);
     while (dt > step) {
         dt = dt - step;
         gameManager.update();
     }
     last = now;
     counter++;
-    ANIM = requestAnimationFrame(updateWorld);// updateWorld, canvas
+    ANIM = requestAnimationFrame(updateWorld, canvas);
 
 };
