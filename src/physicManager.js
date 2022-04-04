@@ -1,6 +1,6 @@
 class PhysicManager {
     update(obj) {
-        if (obj.pos_y > 650 || obj.pos_y < 0) {
+        if (obj.pos_y > 500 || obj.pos_y < -200) {
             obj.kill();
             return "stop";
         }
@@ -80,7 +80,7 @@ class PhysicManager {
             newX = obj.pos_x + Math.floor(obj.move_x * obj.speed);
         }
         if (newX < 10) return "stop";
-        newY = obj.pos_y + Math.floor(obj.move_y * obj.speed);
+        newY = obj.pos_y + 2*Math.floor(obj.move_y * obj.speed); // jump height
         let ts = mapManager.getTilesetIdx(newX + obj.size_x / 2, newY + obj.size_y / 2);
         let e = this.entityAtXY(obj, newX, newY);
         if (e !== null && obj.onTouchEntity) {

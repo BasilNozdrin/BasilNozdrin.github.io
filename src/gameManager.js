@@ -26,7 +26,7 @@ class GameManager {
                 soundManager.stopAll();
                 soundManager.init();
                 soundManager.play("/mus/aud5.wav", {looping: 0, volume: 0.5});
-                scoreTable.add(nickname, obj.countCoins);
+                scoreTable.add(this.nickname, obj.countCoins);
                 elem.innerHTML = 'Ура! Кажется, у нас новый победитель!';
                 elem1.innerHTML = 'Круто, но я хочу пройти заново!';
                 result.style.display = 'block';
@@ -114,8 +114,8 @@ class GameManager {
     play() {
         this.levels.curr = 1;
         this.totalScore = 0;
-        nickname = document.querySelector("#nickname").value;
-        if(nickname.length > 0){
+        this.nickname = document.querySelector("#nickname").value;
+        if(this.nickname.length > 0){
             document.querySelector("#myModal").style.display = "none";
             soundManager.init();
             soundManager.loadArray(["/mus/aud1.wav","/mus/aud2.wav", "/mus/aud3.wav", "/mus/aud6.mp3", "/mus/aud5.wav"]);

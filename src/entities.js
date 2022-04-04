@@ -19,7 +19,7 @@ class Player extends Entity {
         this.countCoins = 0;
         this.move_x = 0;
         this.move_y = 0;
-        this.speed = 20;
+        this.speed = 20; // movement speed
         this.numbL = 0;
         this.numbR = 0;
         this.left = ["rick_left1", "rick_left2", "rick_left3", "rick_left4"];
@@ -39,17 +39,16 @@ class Player extends Entity {
 
     onTouchEntity(obj) {
         if (obj.name.match(/coins[\d*]/)) {
-            soundManager.play("/mus/aud1.wav", {looping: 0, volume: 0.5});
+            soundManager.play("/mus/aud1.wav", {looping: 0, volume: 0.1});
             this.countCoins += 1;
-            let elem = document.getElementById('pCoins');
+            let elem = document.querySelector('#pCoins');
             elem.innerHTML = this.countCoins;
             obj.kill();
-
         }
-        if (obj.name.match(/kosm/)) {;
+        if (obj.name.match(/kosm/)) {
             soundManager.stopAll();
             soundManager.init();
-            soundManager.play("/mus/aud2.wav", {looping: 0, volume: 1});
+            soundManager.play("/mus/aud2.wav", {looping: 0, volume: 0.5});
             obj.touch = true;
             this.win = true;
             obj.move_y = 4;
@@ -60,8 +59,7 @@ class Player extends Entity {
         }
     }
 
-    onTouchMap(obj) {
-    };
+    onTouchMap(obj) {};
 
     kill() {
         window.cancelAnimationFrame(ANIM);

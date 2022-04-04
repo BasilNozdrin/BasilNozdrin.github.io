@@ -1,4 +1,4 @@
-const INITIAL_WIDTH = 1700;
+const INITIAL_WIDTH = 1200;
 const INITIAL_HEIGHT = 850;
 
 class MapManager {

@@ -1,19 +1,19 @@
 const timestamp = () => {
-    return window.performance && window.performance.now ? window.performance.now() : new Date().getTime();
-};
+    return window.performance && window.performance.now() ? window.performance.now() : new Date().getTime();
+}
 
 const getItem = (item) => {
-    if(localStorage)
+    if (localStorage)
         return localStorage.getItem(item);
     else
         return null;
-};
+}
 
 const setItem = (item, val) => {
-    if(localStorage){
+    if (localStorage) {
         localStorage.setItem(item, val);
     }
-};
+}
 
 const updateWorld = () => {
     now = timestamp();
@@ -24,6 +24,5 @@ const updateWorld = () => {
     }
     last = now;
     counter++;
-    ANIM = requestAnimationFrame(updateWorld, canvas);
-
-};
+    ANIM = requestAnimationFrame(updateWorld); // canvas
+}
